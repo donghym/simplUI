@@ -26,6 +26,12 @@ const config: StorybookConfig = {
       { find: '@simplui/ui', replacement: '../packages/ui/src' },
       { find: '@simplui/ui/src', replacement: '../packages/ui/src' },
     ]
+    // 确保 JSX 正确转换
+    config.esbuild = {
+      ...config.esbuild,
+      jsx: 'automatic',
+      jsxImportSource: 'react',
+    }
     return config
   },
 }
