@@ -3,14 +3,14 @@ set -euo pipefail
 
 # ================= 基础配置 =================
 # 1. 修改为你的项目实际路径
-PROJECT_DIR="/var/www/UI2/SimplUI"
+PROJECT_DIR="/var/www/UI2/simplUI"
 
 # 2. 修改为你的日志页面存放路径（刚才创建的目录）
-LOG_DIR="/var/www/UI2/SimplUI/deploy"
+LOG_DIR="/var/www/UI2/simplUI/deploy"
 LOG_PAGE="${LOG_DIR}/index.html"
 
 # 3. Nginx 静态文件目录
-NGINX_ROOT="/var/www/UI2/SimplUI/storybook-static"
+NGINX_ROOT="/var/www/UI2/simplUI/storybook-static"
 
 # 日志输出函数
 log_info() {
