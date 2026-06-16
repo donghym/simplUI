@@ -1,56 +1,32 @@
 import React, { forwardRef, useState, useCallback } from 'react'
 import { cn } from '../lib/utils'
-import { cva } from 'class-variance-authority'
+import { segmentedVariants, segmentedItemVariants } from './segmented-variants'
 import type { SegmentedProps, SegmentedOption } from './types'
 
 export type { SegmentedProps, SegmentedOption }
+export { segmentedVariants, segmentedItemVariants }
 
-/* ─── cva 变体 ─── */
-const segmentedVariants = cva(
-  'inline-flex rounded-md bg-[#f5f5f5] p-0.5',
-)
-
-const segmentedItemVariants = cva(
-  'flex items-center gap-1 whitespace-nowrap border-none rounded transition-all duration-200',
-  {
-    variants: {
-      active: {
-        true: 'bg-white text-primary-600 font-medium shadow-[0_2px_4px_rgba(0,0,0,0.1)] ring-1 ring-gray-200',
-        false: 'bg-transparent text-[#595959] font-normal shadow-none',
-      },
-      disabled: {
-        true: 'cursor-not-allowed text-[#bfbfbf]',
-        false: 'cursor-pointer',
-      },
-      size: {
-        large: 'px-4 py-1.5 text-base',
-        middle: 'px-3 py-1 text-sm',
-        small: 'px-2 py-0.5 text-xs',
-      },
-    },
-    compoundVariants: [
-      { active: true, disabled: true, className: 'bg-white text-[#bfbfbf]' },
-    ],
-    defaultVariants: { active: false, disabled: false, size: 'middle' },
-  },
-)
-
+/** 判断选项是否为字符串类型 */
 function isStringOption(option: string | SegmentedOption): option is string {
   return typeof option === 'string'
 }
 
+/** 获取选项的值 */
 function getOptionValue(option: string | SegmentedOption): string {
   return isStringOption(option) ? option : option.value
 }
 
+/** 获取选项的标签 */
 function getOptionLabel(option: string | SegmentedOption): React.ReactNode {
   return isStringOption(option) ? option : (option.label ?? option.value)
 }
 
+/** 获取选项的禁用状态 */
 function getOptionDisabled(option: string | SegmentedOption): boolean {
   return isStringOption(option) ? false : !!option.disabled
 }
 
+/** 获取选项的图标 */
 function getOptionIcon(option: string | SegmentedOption): React.ReactNode | undefined {
   return isStringOption(option) ? undefined : option.icon
 }

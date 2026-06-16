@@ -1,27 +1,12 @@
 import React, { forwardRef, useState, useCallback } from 'react'
-import { cva } from 'class-variance-authority'
 import { cn } from '../lib/utils'
+import { alertVariants } from './alert-variants'
 import type { AlertProps } from './types'
 
 export type { AlertProps }
+export { alertVariants }
 
-const alertVariants = cva(
-  'sui-alert sui-alert--with-description',
-  {
-    variants: {
-      type: {
-        success: 'sui-alert--success',
-        info: 'sui-alert--info',
-        warning: 'sui-alert--warning',
-        error: 'sui-alert--error',
-      },
-    },
-    defaultVariants: {
-      type: 'info',
-    },
-  },
-)
-
+/** 图标映射，根据 type 显示对应图标 */
 const iconMap: Record<string, React.ReactNode> = {
   success: (
     <svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">

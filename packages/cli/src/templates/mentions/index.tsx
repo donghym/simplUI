@@ -1,43 +1,10 @@
 import React, { forwardRef, useState, useCallback, useRef, useMemo } from 'react'
 import { cn } from '../lib/utils'
-import { cva } from 'class-variance-authority'
+import { mentionsVariants, mentionsTextareaVariants, mentionsDropdownVariants, mentionsOptionVariants } from './mentions-variants'
 import type { MentionsProps, MentionsOptionProps } from './types'
 
 export type { MentionsProps, MentionsOptionProps }
-
-/* ─── cva 变体 ─── */
-const mentionsVariants = cva('relative inline-block w-full')
-
-const mentionsTextareaVariants = cva(
-  'w-full rounded-md border border-[#d9d9d9] text-[#262626] text-sm leading-normal resize-y px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1',
-  {
-    variants: {
-      disabled: {
-        true: 'bg-[#f5f5f5] cursor-not-allowed',
-        false: 'bg-white cursor-text',
-      },
-    },
-    defaultVariants: { disabled: false },
-  },
-)
-
-const mentionsDropdownVariants = cva(
-  'absolute top-full left-0 mt-1 min-w-[120px] bg-white rounded-lg shadow-[0_3px_6px_-4px_rgba(0,0,0,0.12),0_6px_16px_rgba(0,0,0,0.08)] z-[1070] max-h-[250px] overflow-auto',
-)
-
-const mentionsOptionVariants = cva(
-  'px-3 py-2 cursor-pointer',
-  {
-    variants: {
-      active: { true: 'bg-[#e6f4ff]' },
-      disabled: { true: 'text-[#bfbfbf]' },
-    },
-    compoundVariants: [
-      { active: false, disabled: false, className: 'bg-transparent text-[#262626]' },
-    ],
-    defaultVariants: { active: false, disabled: false },
-  },
-)
+export { mentionsVariants, mentionsTextareaVariants, mentionsDropdownVariants, mentionsOptionVariants }
 
 /**
  * Mentions 提及组件
