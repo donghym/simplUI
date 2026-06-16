@@ -44,7 +44,7 @@ export const ProFormList = forwardRef<HTMLDivElement, ProFormListProps>(({
             <div className={cn(proFormListActionsVariants(), 'ml-3 self-start')}>
               <Button
                 variant="link"
-                className="text-danger"
+                className="text-danger-500"
                 onClick={() => removeItem(index)}
                 icon={<Trash2 className="h-4 w-4" />}
               >

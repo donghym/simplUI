@@ -49,7 +49,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>((props, ref) =>
       onClick={handleClick}
       className={cn(
         switchTrackVariants({ checked, loading, disabled }),
-        hasText ? 'h-[22px] min-w-[44px] px-0.5' : 'h-[22px] w-[44px]',
+        hasText ? 'h-6 min-w-[48px] px-0.5' : 'h-6 w-10',
         className,
       )}
       {...rest}

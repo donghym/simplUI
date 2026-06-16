@@ -7,7 +7,7 @@ export const skeletonRootVariants = cva('flex gap-4', {
 
 /** 骨架屏基础样式 */
 export const skeletonVariants = cva(
-  'bg-muted rounded',
+  'bg-gray-400 rounded',
   {
     variants: {
       variant: {

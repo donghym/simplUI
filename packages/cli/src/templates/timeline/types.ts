@@ -24,7 +24,7 @@ export interface TimelineItem {
 
 /** 时间线项属性 */
 export interface TimelineItemProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, 'color'>,
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'color' | 'title'>,
     VariantProps<typeof timelineItemVariants> {
   /** 节点状态 */
   status?: TimelineStatus

@@ -16,26 +16,6 @@ const config: StorybookConfig = {
     autodocs: true,
     defaultName: 'Docs',
   },
-  // 注入 iframe 的 html/body 样式
-  previewHead: (head) => `
-    ${head}
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-      body {
-        background: transparent;
-      }
-      #storybook-root {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
-  `,
   viteFinal: async (config) => {
     config.resolve = config.resolve || {}
     const existing = Array.isArray(config.resolve.alias)

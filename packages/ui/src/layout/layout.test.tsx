@@ -62,7 +62,7 @@ describe('Layout', () => {
     )
 
     const sider = screen.getByTestId('sider')
-    expect(sider.className).toContain('bg-[#001529]')
+    expect(sider.className).toContain('bg-gray-900')
   })
 
   it('Sider 浅色主题时有白色背景', () => {

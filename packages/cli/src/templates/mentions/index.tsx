@@ -9,7 +9,7 @@ export type { MentionsProps, MentionsOptionProps }
 const mentionsVariants = cva('relative inline-block w-full')
 
 const mentionsTextareaVariants = cva(
-  'w-full rounded-md border border-[#d9d9d9] text-[#262626] text-sm leading-normal resize-y focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1',
+  'w-full rounded-md border border-[#d9d9d9] text-[#262626] text-sm leading-normal resize-y px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1',
   {
     variants: {
       disabled: {

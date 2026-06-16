@@ -12,7 +12,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       className, status, value: controlledValue, defaultValue = '',
       onChange, onSearch, suggestions, showHistory = true, maxHistory = 10,
       highlightMatch = true, placeholder = '搜索...', allowClear = true,
-      disabled = false, emptyText = '无搜索结果', storageKey = 'simplui-search-history',
+      disabled = false, storageKey = 'simplui-search-history',
       ...rest
     } = props
 
@@ -139,7 +139,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             {showHistory && historyList.length > 0 && !currentValue && (
               <div className="flex items-center justify-between px-3 py-1.5 text-xs text-muted-foreground border-b border-border">
                 <span className="flex items-center gap-1"><Clock className="h-3 w-3" />搜索历史</span>
-                <button type="button" className="hover:text-danger transition-colors" onClick={handleClearHistory}><Trash2 className="h-3 w-3" /></button>
+                <button type="button" className="hover:text-danger-500 transition-colors" onClick={handleClearHistory}><Trash2 className="h-3 w-3" /></button>
               </div>
             )}
             {displayItems.map((item, index) => (
@@ -152,7 +152,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
                     ? <HighlightText text={item.text} keyword={currentValue} /> : item.text}
                 </span>
                 {item.isHistory && (
-                  <button type="button" className="shrink-0 text-muted-foreground hover:text-danger transition-colors"
+                  <button type="button" className="shrink-0 text-muted-foreground hover:text-danger-500 transition-colors"
                     onClick={(e) => handleDeleteHistory(e, item.text)} aria-label="删除此条历史"><X className="h-3 w-3" /></button>
                 )}
               </div>

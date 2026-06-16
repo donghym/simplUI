@@ -1,5 +1,4 @@
 import type { CropRect } from './types'
-import { drawCanvas, cropAndExport } from './image-editor-canvas'
 
 export type { EditorState, CropRect, DragState } from './types'
 export { drawCanvas, cropAndExport } from './image-editor-canvas'

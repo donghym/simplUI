@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority'
 
 export const sliderVariants = cva(
-  'relative w-full rounded-full bg-muted select-none',
+  'relative w-full rounded-full bg-gray-400 select-none',
   {
     variants: {
       disabled: {

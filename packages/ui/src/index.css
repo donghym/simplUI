@@ -143,11 +143,11 @@
   }
 
   .sui-transfer__item--selected {
-    @apply bg-blue-50 text-blue-700 font-medium;
+    @apply bg-primary-50 text-primary-700 font-medium;
   }
 
   .sui-transfer__item--selected:hover {
-    @apply bg-blue-100;
+    @apply bg-primary-100;
   }
 
   .sui-transfer__item--disabled {

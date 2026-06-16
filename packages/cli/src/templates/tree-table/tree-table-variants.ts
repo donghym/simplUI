@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority'
 export const treeTableVariants = cva('w-full text-sm', {
   variants: {
     bordered: {
-      true: 'border border-border rounded-md',
+      true: 'border border-gray-300 rounded-md',
       false: '',
     },
   },

@@ -30,18 +30,22 @@ export const popoverVariants = cva(
  * 箭头变体配置
  *
  * 4 个基础方向的箭头样式，使用 CSS border 技巧绘制三角形。
- * 位置由 placement 的第二个单词（Left/Right）控制对齐方向，
- * 箭头始终指向触发元素。
+ * 箭头方向指向触发元素（与 placement 相反）。
+ * 例如：placement=top（浮层在上方），箭头指向下方（朝向触发元素）。
  */
 export const arrowVariants = cva(
   'absolute w-2 h-2 rotate-45 bg-background border border-border',
   {
     variants: {
       arrowPlacement: {
-        top: '-bottom-1 left-1/2 -translate-x-1/2 border-t-0 border-l-0',
-        bottom: '-top-1 left-1/2 -translate-x-1/2 border-b-0 border-r-0',
-        left: '-right-1 top-1/2 -translate-y-1/2 border-l-0 border-b-0',
-        right: '-left-1 top-1/2 -translate-y-1/2 border-r-0 border-t-0',
+        // 浮层在上方，箭头在浮层底部，指向下（朝向触发元素）
+        top: '-bottom-1 left-1/2 -translate-x-1/2 border-b-0 border-r-0',
+        // 浮层在下方，箭头在浮层顶部，指向上（朝向触发元素）
+        bottom: '-top-1 left-1/2 -translate-x-1/2 border-t-0 border-l-0',
+        // 浮层在左侧，箭头在浮层右边，指向右（朝向触发元素）
+        left: '-right-1 top-1/2 -translate-y-1/2 border-r-0 border-t-0',
+        // 浮层在右侧，箭头在浮层左边，指向左（朝向触发元素）
+        right: '-left-1 top-1/2 -translate-y-1/2 border-l-0 border-b-0',
       },
     },
   },

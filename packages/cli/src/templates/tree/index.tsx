@@ -36,17 +36,10 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
     return filterTree(treeData, (node) => filterTreeNode(node, searchValue))
   }, [treeData, searchValue, filterTreeNode])
 
-  const handleNodeClick = useCallback(
-    (node: TreeNodeData, e: React.MouseEvent) => {
-      if (node.disabled || selectMode === 'none') return
-      if (selectMode === 'single') {
-        const newKeys = [node.key]
-        if (!isControlledSelected) setInnerSelectedKeys(newKeys)
-        onSelect?.(newKeys, { node, selected: true, selectedNodes: [node], nativeEvent: e })
-      }
-    },
-    [selectMode, isControlledSelected, onSelect],
-  )
+  // 使用 ref 存储回调函数，避免循环依赖
+  const callbacksRef = useRef({
+    handleToggleCheck: null as ((node: TreeNodeData) => void) | null,
+  })
 
   const handleToggleExpand = useCallback(
     (node: TreeNodeData) => {
@@ -79,6 +72,24 @@ export const Tree = forwardRef<HTMLDivElement, TreeProps>((props, ref) => {
       })
     },
     [currentCheckedKeys, isControlledChecked, onCheck, selectMode, treeData],
+  )
+
+  // 更新 ref
+  callbacksRef.current.handleToggleCheck = handleToggleCheck
+
+  const handleNodeClick = useCallback(
+    (node: TreeNodeData, e: React.MouseEvent) => {
+      if (node.disabled || selectMode === 'none') return
+      if (selectMode === 'single') {
+        const newKeys = [node.key]
+        if (!isControlledSelected) setInnerSelectedKeys(newKeys)
+        onSelect?.(newKeys, { node, selected: true, selectedNodes: [node], nativeEvent: e })
+      } else if (selectMode === 'multiple') {
+        // 多选模式下点击节点也可以切换勾选状态
+        callbacksRef.current.handleToggleCheck?.(node)
+      }
+    },
+    [selectMode, isControlledSelected, onSelect],
   )
 
   const renderNode = (node: TreeNodeData, level: number) => (

@@ -46,7 +46,7 @@ export const timelineTitleVariants = cva(
 export const timelineStatusVariants = cva(
   'text-xs inline-block px-2 py-0.5 rounded-full mt-1',
   {
-    variants: { status: { completed: 'bg-green-100 text-green-700', active: 'bg-blue-100 text-blue-700', pending: 'bg-gray-100 text-gray-500' } },
+    variants: { status: { completed: 'bg-success-50 text-success-600', active: 'bg-primary-50 text-primary-700', pending: 'bg-gray-100 text-gray-500' } },
     defaultVariants: { status: 'pending' },
   }
 )

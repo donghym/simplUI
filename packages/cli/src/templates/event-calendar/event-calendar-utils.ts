@@ -1,5 +1,3 @@
-import type { CalendarEvent } from './types'
-
 /** 格式化日期为 YYYY-MM-DD */
 export function formatDate(date: Date): string {
   const y = date.getFullYear()

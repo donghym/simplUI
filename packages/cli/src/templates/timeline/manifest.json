@@ -7,7 +7,8 @@
     "types.ts"
   ],
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority",
+    "lucide-react"
   ],
-  "description": "Timeline vertical list component with status variants"
+  "description": "Timeline vertical list component"
 }

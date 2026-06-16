@@ -2,7 +2,7 @@ import { forwardRef, useState, useRef, useEffect, useCallback } from 'react'
 import { RotateCcw, RotateCw, FlipHorizontal, FlipVertical, ZoomIn, ZoomOut, Crop, Check, X } from 'lucide-react'
 import { cn } from '../lib/utils'
 import { imageEditorVariants, toolbarVariants, toolButtonVariants } from './image-editor-variants'
-import type { ImageEditorProps, CropArea } from './types'
+import type { ImageEditorProps } from './types'
 import type { EditorState, CropRect, DragState } from './image-editor-utils'
 import { drawCanvas, cropAndExport, moveCropRect, resizeCropRect } from './image-editor-utils'
 

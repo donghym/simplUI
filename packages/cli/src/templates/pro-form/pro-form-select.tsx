@@ -53,7 +53,7 @@ export const ProFormSelect = forwardRef<HTMLDivElement, ProFormSelectProps>(({
             : 'mb-1.5',
         )} htmlFor={name}
         >
-          {isRequired && <span className="text-danger mr-1">*</span>}
+          {isRequired && <span className="text-danger-500 mr-1">*</span>}
           <span>{label}</span>
         </label>
       )}
@@ -69,7 +69,7 @@ export const ProFormSelect = forwardRef<HTMLDivElement, ProFormSelectProps>(({
             setFieldValue(name, val)
           }}
         />
-        {error && <div className="text-xs text-danger mt-1">{error}</div>}
+        {error && <div className="text-xs text-danger-500 mt-1">{error}</div>}
       </div>
     </div>
   )

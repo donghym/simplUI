@@ -21,8 +21,16 @@ export const proFormGridVariants = cva('grid', {
       3: 'grid-cols-3',
       4: 'grid-cols-4',
     },
+    gap: {
+      8: 'gap-2',
+      12: 'gap-3',
+      16: 'gap-4',
+      20: 'gap-5',
+      24: 'gap-6',
+      32: 'gap-8',
+    },
   },
-  defaultVariants: { columns: 2 },
+  defaultVariants: { columns: 2, gap: 16 },
 })
 
 /** ProForm 提交按钮区域 */

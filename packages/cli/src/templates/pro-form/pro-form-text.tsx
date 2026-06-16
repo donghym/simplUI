@@ -46,7 +46,7 @@ export const ProFormText = forwardRef<HTMLDivElement, ProFormTextProps>(({
             : 'mb-1.5',
         )} htmlFor={name}
         >
-          {isRequired && <span className="text-danger mr-1">*</span>}
+          {isRequired && <span className="text-danger-500 mr-1">*</span>}
           <span>{label}</span>
         </label>
       )}
@@ -61,7 +61,7 @@ export const ProFormText = forwardRef<HTMLDivElement, ProFormTextProps>(({
             setFieldValue(name, e.target.value)
           }}
         />
-        {error && <div className="text-xs text-danger mt-1">{error}</div>}
+        {error && <div className="text-xs text-danger-500 mt-1">{error}</div>}
       </div>
     </div>
   )

@@ -34,7 +34,7 @@ export const actionSheetItemVariants = cva(
   {
     variants: {
       danger: {
-        true: 'text-danger',
+        true: 'text-danger-500',
         false: 'text-foreground',
       },
       disabled: {

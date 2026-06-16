@@ -2,9 +2,9 @@ import { cva } from 'class-variance-authority'
 
 /** Select 触发器样式 */
 export const selectVariants = cva(
-  'flex w-full items-center rounded-md border bg-white transition-all duration-200 ' +
+  'flex w-full items-center rounded-md border border-gray-400 bg-white transition-all duration-200 ' +
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/20 focus-visible:border-primary-500 ' +
-    'disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground disabled:border-border',
+    'disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground disabled:border-gray-400',
   {
     variants: {
       status: {
@@ -26,7 +26,7 @@ export const selectVariants = cva(
       {
         status: undefined,
         open: false,
-        class: 'border-border hover:border-primary-500',
+        class: 'border-gray-400 hover:border-primary-500',
       },
     ],
   }

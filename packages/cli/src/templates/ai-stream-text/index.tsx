@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect, useRef, useCallback } from 'react'
+import { forwardRef, useState, useEffect, useRef } from 'react'
 import { cn } from '../lib/utils'
 import { aiStreamTextVariants, aiStreamCursorVariants } from './ai-stream-text-variants'
 import type { AIStreamTextProps } from './types'

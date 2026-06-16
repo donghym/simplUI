@@ -7,7 +7,7 @@ import { cva } from 'class-variance-authority'
  * 2 种状态变体：error / warning，控制边框和聚焦环颜色。
  */
 export const tagInputVariants = cva(
-  'flex flex-wrap items-center gap-1.5 min-h-[38px] w-full rounded-md border bg-white px-3 py-1.5 text-sm transition-colors ' +
+  'flex flex-wrap items-center gap-1.5 min-h-[38px] w-full rounded-md border border-gray-400 bg-white px-3 py-1.5 text-sm transition-colors ' +
     'focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-1 ' +
     'disabled:cursor-not-allowed disabled:opacity-50',
   {

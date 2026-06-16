@@ -44,7 +44,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(({ className, ...rest }, ref
   return (
     <header
       ref={ref}
-      className={cn('sui-layout-header', 'h-16 px-[50px] flex items-center bg-[#001529] text-white/85', className)}
+      className={cn('sui-layout-header', 'h-16 px-[50px] flex items-center bg-gray-900 text-white/85', className)}
       {...rest}
     />
   )
@@ -54,14 +54,14 @@ Header.displayName = 'Layout.Header'
 
 /** Content 主要内容区域 */
 const Content = forwardRef<HTMLElement, ContentProps>(({ className, ...rest }, ref) => {
-  return <main ref={ref} className={cn('sui-layout-content', 'flex-1 bg-[#f5f5f5]', className)} {...rest} />
+  return <main ref={ref} className={cn('sui-layout-content', 'flex-1 bg-muted', className)} {...rest} />
 })
 
 Content.displayName = 'Layout.Content'
 
 /** Footer 底部区域 */
 const Footer = forwardRef<HTMLElement, FooterProps>(({ className, ...rest }, ref) => {
-  return <footer ref={ref} className={cn('sui-layout-footer', 'text-center text-black/45 bg-[#f5f5f5] py-6 px-[50px]', className)} {...rest} />
+  return <footer ref={ref} className={cn('sui-layout-footer', 'text-center text-muted-foreground bg-muted py-6 px-[50px]', className)} {...rest} />
 })
 
 Footer.displayName = 'Layout.Footer'
@@ -151,7 +151,7 @@ const Sider = forwardRef<HTMLElement, SiderProps>(({
             'sui-layout-sider-trigger',
             'absolute bottom-0 left-0 w-full h-12 flex items-center justify-center',
             theme === 'dark'
-              ? 'text-white hover:text-white bg-[#002140]'
+              ? 'text-white hover:text-white bg-gray-800'
               : 'text-muted-foreground hover:text-foreground border-t border-border bg-background',
             triggerClassName,
           )}

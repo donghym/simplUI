@@ -102,23 +102,23 @@ export const CodeEditor = forwardRef<HTMLDivElement, CodeEditorProps>((props, re
   }, [])
 
   return (
-    <div ref={ref} className={cn(codeEditorVariants({ readonly }), className)} {...rest}>
-      <div className="flex min-h-[200px]">
+    <div ref={ref} className={cn(codeEditorVariants({ readonly }), 'h-[300px]', className)} {...rest}>
+      <div className="flex h-full">
         {showLineNumbers && (
-          <div ref={lineNumbersRef} className="flex-shrink-0 select-none overflow-hidden border-r border-border bg-muted/50 py-3 text-right">
+          <div ref={lineNumbersRef} className="flex-shrink-0 select-none overflow-hidden border-r border-border bg-muted/50 py-3 text-right h-full">
             {Array.from({ length: lineCount }, (_, i) => (
               <div key={i + 1} className="px-3 leading-[1.5] text-muted-foreground">{i + 1}</div>
             ))}
           </div>
         )}
-        <div className="relative flex-1">
+        <div className="relative flex-1 h-full">
           {readonly && (
-            <div className={cn('absolute inset-0 overflow-auto p-3 leading-[1.5] whitespace-pre', !wordWrap && 'overflow-x-auto')}
+            <div className={cn('absolute inset-0 overflow-auto p-3 leading-[1.5] whitespace-pre h-full', !wordWrap && 'overflow-x-auto')}
               dangerouslySetInnerHTML={{ __html: highlightedHtml || '&nbsp;' }} />
           )}
           <textarea
             ref={textareaRef}
-            className={cn('w-full resize-none p-3 leading-[1.5] outline-none placeholder:text-muted-foreground', readonly && 'invisible', !wordWrap ? 'whitespace-pre overflow-x-auto' : 'whitespace-pre-wrap')}
+            className={cn('w-full h-full resize-none p-3 leading-[1.5] outline-none placeholder:text-muted-foreground', readonly && 'invisible', !wordWrap ? 'whitespace-pre overflow-x-auto' : 'whitespace-pre-wrap')}
             value={currentValue} onChange={handleChange} onKeyDown={handleKeyDown}
             placeholder={placeholder} readOnly={readonly} spellCheck={false} autoCapitalize="off" autoCorrect="off"
           />

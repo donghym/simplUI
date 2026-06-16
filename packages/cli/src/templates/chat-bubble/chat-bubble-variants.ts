@@ -32,7 +32,7 @@ export const chatBubbleContentVariants = cva(
 
 /** 头像容器变体 */
 export const chatBubbleAvatarVariants = cva(
-  'shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium',
+  'shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium border border-gray-400',
   {
     variants: {
       role: {

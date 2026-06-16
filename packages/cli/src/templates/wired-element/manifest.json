@@ -4,12 +4,11 @@
   "files": [
     "index.tsx",
     "wired-element-variants.ts",
-    "wired-element-utils.ts",
-    "wired-element-background.tsx",
     "types.ts"
   ],
   "dependencies": [
-    "class-variance-authority"
+    "class-variance-authority",
+    "lucide-react"
   ],
   "description": "WiredElement with hand-drawn wireframe style"
 }

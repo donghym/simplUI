@@ -29,7 +29,9 @@ function toTableColumns<T>(columns: ProTableColumn<T>[], visibleKeys: Set<string
   return columns.filter(col => !col.hideInTable && visibleKeys.has(col.dataIndex)).map(col => {
     const base: ColumnType<T> = {
       title: col.title, dataIndex: col.dataIndex, key: col.dataIndex, width: col.width,
-      sorter: typeof col.sorter === 'boolean' ? col.sorter : undefined,
+      sorter: typeof col.sorter === 'function'
+        ? (a: T, b: T) => (col.sorter as (a: T, b: T) => number)(a, b)
+        : col.sorter === true ? true : undefined,
       filters: col.filters, editable: col.editable,
       renderEdit: col.renderFormItem ? (value, _r, _i, onSave) => col.renderFormItem!({ value, onChange: onSave }) : undefined,
     }
@@ -42,7 +44,7 @@ function toTableColumns<T>(columns: ProTableColumn<T>[], visibleKeys: Set<string
 /** ProTable 核心逻辑 */
 function ProTableInner<T>(props: ProTableProps<T>, ref: React.ForwardedRef<HTMLDivElement>) {
   const { className, request, columns, dataSource, search = false, toolbar = false,
-    manualRequest = false, polling, defaultPageSize = 10, rowKey = 'id', onLoadingChange, ...rest } = props
+    manualRequest = false, polling, defaultPageSize = 10, rowKey = 'id', onLoadingChange, height = 400, ...rest } = props
 
   const [loading, setLoading] = useState(false)
   const [requestData, setRequestData] = useState<T[]>([])
@@ -65,7 +67,7 @@ function ProTableInner<T>(props: ProTableProps<T>, ref: React.ForwardedRef<HTMLD
     } finally { setLoading(false); onLoadingChange?.(false) }
   }, [request, onLoadingChange])
 
-  useEffect(() => { if (request && !manualRequest) fetchData(1, defaultPageSize, '') }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (request && !manualRequest) fetchData(1, defaultPageSize, '') }, [request, manualRequest, fetchData, defaultPageSize])
   useEffect(() => {
     if (!polling || !request) return
     pollingRef.current = setInterval(() => fetchData(current, pageSize, keyword), polling)
@@ -77,17 +79,19 @@ function ProTableInner<T>(props: ProTableProps<T>, ref: React.ForwardedRef<HTMLD
   const handlePageChange = (page: number, size: number) => { setCurrent(page); if (request) fetchData(page, size, keyword) }
   const handlePageSizeChange = (size: number) => { setPageSize(size); setCurrent(1); if (request) fetchData(1, size, keyword) }
 
+  const isRequestMode = !!request
+
   const filteredData = useMemo(() => {
     const source = dataSource ?? requestData
-    if (!keyword) return source
+    // request 模式下跳过客户端 keyword 过滤，由服务端处理
+    if (!keyword || isRequestMode) return source
     const kw = keyword.toLowerCase()
     return source.filter(item => Object.values(item as Record<string, unknown>).some(v => String(v).toLowerCase().includes(kw)))
-  }, [dataSource, requestData, keyword])
+  }, [dataSource, requestData, keyword, isRequestMode])
 
-  const isRequestMode = !!request
   const displayTotal = isRequestMode ? total : filteredData.length
   const startIdx = (current - 1) * pageSize
-  const pageData = isRequestMode ? filteredData : filteredData.slice(startIdx, startIdx + pageSize)
+  const pageData = isRequestMode ? requestData : filteredData.slice(startIdx, startIdx + pageSize)
   const tableColumns = useMemo(() => toTableColumns(columns, visibleKeys), [columns, visibleKeys])
   const showSearch = search !== false
   const showToolbar = toolbar !== false
@@ -115,7 +119,7 @@ function ProTableInner<T>(props: ProTableProps<T>, ref: React.ForwardedRef<HTMLD
                   <label key={col.dataIndex} className="flex items-center gap-2 px-2 py-1 hover:bg-muted cursor-pointer">
                     <Checkbox checked={visibleKeys.has(col.dataIndex)} onChange={checked => {
                       const next = new Set(visibleKeys)
-                      checked ? next.add(col.dataIndex) : next.delete(col.dataIndex)
+                      if (checked) { next.add(col.dataIndex) } else { next.delete(col.dataIndex) }
                       setVisibleKeys(next)
                     }} />
                     <span className="text-sm">{col.title}</span>
@@ -129,7 +133,7 @@ function ProTableInner<T>(props: ProTableProps<T>, ref: React.ForwardedRef<HTMLD
         </div>
       )}
       <Table columns={tableColumns} dataSource={pageData} rowKey={rowKey}
-        height={400} loading={loading} bordered={false} pagination={false} />
+        height={height} loading={loading} bordered={false} pagination={false} />
       {displayTotal > 0 && (
         <div className={cn(proTablePaginationVariants())}>
           <Pagination current={current} pageSize={pageSize} total={displayTotal}

@@ -38,7 +38,7 @@ export const ElasticToggle = forwardRef<HTMLButtonElement, ElasticToggleProps>((
       className={cn(
         'sui-elastic-toggle',
         elasticToggleVariants({ checked, disabled }),
-        'h-[22px] w-[44px]',
+        'h-6 w-10',
         className,
       )}
       {...rest}

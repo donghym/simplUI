@@ -84,11 +84,11 @@ export const TabBar = forwardRef<HTMLDivElement, TabBarProps>(
               onClick={() => handleItemClick(item)}
               className={tabBarItemVariants({ active: isActive, disabled: item.disabled })}
             >
-              <span className="relative inline-flex">
+              <span className="relative inline-flex shrink-0">
                 {currentIcon}
                 {renderBadge(item)}
               </span>
-              <span className="text-[10px] leading-tight">{item.label}</span>
+              <span className="text-[10px] leading-tight whitespace-nowrap">{item.label}</span>
             </button>
           )
         })}

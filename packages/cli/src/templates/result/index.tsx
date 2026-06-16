@@ -7,13 +7,13 @@ import type { ResultProps, ResultStatus } from './types'
 export type { ResultProps, ResultStatus }
 
 const iconColorClass: Record<ResultStatus, string> = {
-  success: 'text-success',
-  error: 'text-danger',
-  info: 'text-primary',
-  warning: 'text-warning',
+  success: 'text-success-500',
+  error: 'text-danger-500',
+  info: 'text-primary-500',
+  warning: 'text-warning-500',
   '404': 'text-gray-500',
-  '403': 'text-danger',
-  '500': 'text-danger',
+  '403': 'text-danger-500',
+  '500': 'text-danger-500',
 }
 
 const iconMap: Record<ResultStatus, React.ReactNode> = {

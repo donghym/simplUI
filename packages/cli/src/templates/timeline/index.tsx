@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { Check } from 'lucide-react'
 import { cn } from '../lib/utils'
 import {
   timelineVariants,
@@ -42,7 +43,7 @@ const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
         {/* 节点圆圈 */}
         <div className={cn(timelineDotVariants({ status }))}>
           {status === 'completed' ? (
-            icon || <span className="w-4 h-4">V</span>
+            icon || <Check className="w-4 h-4" />
           ) : (
             icon || (index !== undefined ? index + 1 : null)
           )}

@@ -15,7 +15,7 @@ const segmentedItemVariants = cva(
   {
     variants: {
       active: {
-        true: 'bg-white text-[#262626] font-medium shadow-[0_1px_2px_rgba(0,0,0,0.05)]',
+        true: 'bg-white text-primary-600 font-medium shadow-[0_2px_4px_rgba(0,0,0,0.1)] ring-1 ring-gray-200',
         false: 'bg-transparent text-[#595959] font-normal shadow-none',
       },
       disabled: {

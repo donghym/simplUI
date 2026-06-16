@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react'
+import { HTMLAttributes } from 'react'
 import type { VariantProps } from 'class-variance-authority'
 import { searchInputVariants } from './search-input-variants'
 

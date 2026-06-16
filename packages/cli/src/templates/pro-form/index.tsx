@@ -59,13 +59,47 @@ const ProForm = forwardRef<HTMLFormElement, ProFormProps>(({
     return undefined
   }, [formValues])
 
+  const validateFieldWithValues = useCallback((fieldName: string, values: Record<string, unknown>): string | undefined => {
+    const rules = rulesMapRef.current[fieldName]
+    if (!rules || rules.length === 0) return undefined
+    const value = values[fieldName]
+    for (const rule of rules) {
+      if (rule.required && (value === undefined || value === null || value === '')) {
+        const msg = rule.message || `${fieldName} 为必填项`
+        setErrors((prev) => ({ ...prev, [fieldName]: msg }))
+        return msg
+      }
+      if (rule.pattern && typeof value === 'string' && !rule.pattern.test(value)) {
+        const msg = rule.message || `${fieldName} 格式不正确`
+        setErrors((prev) => ({ ...prev, [fieldName]: msg }))
+        return msg
+      }
+      if (rule.min !== undefined && typeof value === 'string' && value.length < rule.min) {
+        const msg = rule.message || `${fieldName} 最少 ${rule.min} 个字符`
+        setErrors((prev) => ({ ...prev, [fieldName]: msg }))
+        return msg
+      }
+      if (rule.max !== undefined && typeof value === 'string' && value.length > rule.max) {
+        const msg = rule.message || `${fieldName} 最多 ${rule.max} 个字符`
+        setErrors((prev) => ({ ...prev, [fieldName]: msg }))
+        return msg
+      }
+    }
+    setErrors((prev) => { const n = { ...prev }; delete n[fieldName]; return n })
+    return undefined
+  }, [])
+
   const setFieldValue = useCallback((name: string, value: unknown) => {
-    setFormValues((prev) => ({ ...prev, [name]: value }))
-    setErrors((prev) => { const n = { ...prev }; delete n[name]; return n })
-    Object.entries(depsMapRef.current).forEach(([depName, deps]) => {
-      if (deps.includes(name)) validateSingleField(depName)
+    setFormValues((prev) => {
+      const next = { ...prev, [name]: value }
+      // 在同步上下文中使用最新值校验依赖字段
+      Object.entries(depsMapRef.current).forEach(([depName, deps]) => {
+        if (deps.includes(name)) validateFieldWithValues(depName, next)
+      })
+      return next
     })
-  }, [validateSingleField])
+    setErrors((prev) => { const n = { ...prev }; delete n[name]; return n })
+  }, [validateFieldWithValues])
 
   const validateAllFields = useCallback((): boolean => {
     let hasError = false
@@ -115,7 +149,7 @@ const ProForm = forwardRef<HTMLFormElement, ProFormProps>(({
     <ProFormContext.Provider value={contextValue}>
       <form ref={ref} className={cn(proFormVariants({ layout }), className)} onSubmit={handleSubmit} onReset={handleReset} {...rest}>
         {gridConfig
-          ? <div className={cn(proFormGridVariants({ columns: gridConfig.columns }), `gap-${gridConfig.gap}`)}>{children}</div>
+          ? <div className={cn(proFormGridVariants({ columns: gridConfig.columns, gap: gridConfig.gap as 8 | 12 | 16 | 20 | 24 | 32 }))}>{children}</div>
           : children}
         {submitterConfig && (
           <div className={cn(proFormActionsVariants({ layout }))}>

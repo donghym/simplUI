@@ -45,7 +45,9 @@ export function TreeNode({
               e.stopPropagation()
               onToggleExpand(node)
             }}
-            className={cn(treeExpandIconVariants({ expanded }), 'cursor-pointer')}
+            className={cn(treeExpandIconVariants({ expanded }), 'cursor-pointer hover:bg-muted rounded')}
+            role="button"
+            aria-label={expanded ? '收起' : '展开'}
           >
             <ChevronRight className="h-4 w-4" />
           </span>

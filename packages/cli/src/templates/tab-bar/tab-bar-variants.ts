@@ -37,8 +37,8 @@ export const tabBarVariants = cva(
 
 /** 单个标签项样式 */
 export const tabBarItemVariants = cva(
-  'flex flex-col items-center justify-center gap-0.5 flex-1 py-1.5 cursor-pointer select-none ' +
-    'transition-colors duration-200 relative',
+  'flex flex-col items-center justify-center gap-0.5 flex-1 py-1.5 px-1 cursor-pointer select-none ' +
+    'transition-colors duration-200 relative min-w-0',
   {
     variants: {
       active: {

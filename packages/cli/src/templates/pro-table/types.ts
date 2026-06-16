@@ -73,4 +73,6 @@ export interface ProTableProps<T = Record<string, string | number>> extends Omit
   rowKey?: string
   /** 数据加载中回调 */
   onLoadingChange?: (loading: boolean) => void
+  /** 表格高度，默认 400 */
+  height?: number
 }

@@ -1,29 +1,32 @@
 import { cva } from 'class-variance-authority'
 
-/** WiredElement 样式变体 */
+/**
+ * WiredElement 手绘风样式变体
+ *
+ * 使用 rough-notation 风格的 SVG 手绘线条效果。
+ * 核心特征：
+ * - 不规则的圆角（非对称 border-radius）
+ * - 轻微抖动的边框线条
+ * - 手绘填充色（不均匀的色块）
+ * - 整体呈现"草图/线框"质感
+ */
 export const wiredElementVariants = cva(
-  'select-none',
+  'relative inline-block select-none',
   {
     variants: {
       elementType: {
         button:
-          'inline-flex items-center justify-center px-4 py-2 text-sm font-medium ' +
-          'bg-background text-foreground border-2 border-foreground ' +
-          'rounded-[4px_12px_6px_14px/10px 4px 14px 6px] ' +
-          'hover:bg-muted active:scale-95 ' +
-          'transition-all duration-150 cursor-pointer',
+          'px-5 py-2.5 text-sm font-medium text-foreground ' +
+          'cursor-pointer transition-transform duration-100 ' +
+          'active:scale-[0.98]',
         card:
-          'rounded-[6px_14px 8px 16px/12px 6px 16px 8px] ' +
-          'border-2 border-foreground bg-background p-4',
+          'p-5 text-foreground',
         input:
-          'w-full px-3 py-2 text-sm bg-background text-foreground ' +
-          'border-2 border-foreground ' +
-          'rounded-[3px 10px 5px 12px/8px 3px 12px 5px] ' +
-          'placeholder:text-muted-foreground ' +
-          'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1',
+          'w-full text-sm text-foreground ' +
+          'focus:outline-none',
       },
       sketchy: {
-        true: 'border-dashed',
+        true: '',
         false: '',
       },
     },
