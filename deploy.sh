@@ -8,18 +8,29 @@ PROJECT_DIR="/var/www/UI2/simplUI"
 # 2. 修改为你的日志页面存放路径（刚才创建的目录）
 LOG_DIR="/var/www/UI2/simplUI/deploy"
 LOG_PAGE="${LOG_DIR}/index.html"
+LOG_FILE="${LOG_DIR}/deploy-$(date +%Y%m%d).log"
 
 # 3. Nginx 静态文件目录
 NGINX_ROOT="/var/www/UI2/simplUI/storybook-static"
 
+# 先创建日志目录
+mkdir -p "${LOG_DIR}"
+
+# 开启日志输出（同时输出到控制台和文件）
+exec 1> >(tee -a "${LOG_FILE}")
+exec 2> >(tee -a "${LOG_FILE}" >&2)
+
 # 日志输出函数
 log_info() {
-    echo "[INFO] $1"
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [INFO] $1"
+}
+
+log_error() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [ERROR] $1" >&2
 }
 
 # =============== 初始化与代码更新 ===============
-# 创建日志目录并进入项目目录
-mkdir -p "${LOG_DIR}"
+# 进入项目目录
 cd "${PROJECT_DIR}" || exit 1
 
 # 获取更新前的版本号
@@ -55,17 +66,17 @@ log_info "构建文档..."
 npm run storybook:build
 
 log_info "部署静态文件到 Nginx 目录..."
-# rm -rf "${NGINX_ROOT:?}"/*
+
 # =============== 生成部署历史记录 ===============
-if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
-    log_info "生成部署历史记录..."
-    
-    # 确保日志目录存在
-    mkdir -p "${LOG_DIR}"
-    
-    # 如果是首次部署,创建 HTML 骨架
-    if [ ! -f "${LOG_PAGE}" ]; then
-        cat > "${LOG_PAGE}" <<HTML
+log_info "生成部署历史记录..."
+
+# 确保日志目录存在
+mkdir -p "${LOG_DIR}"
+
+# 如果是首次部署,创建 HTML 骨架
+if [ ! -f "${LOG_PAGE}" ]; then
+    log_info "创建首次部署的 HTML 页面..."
+    cat > "${LOG_PAGE}" <<'HTML'
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -73,7 +84,7 @@ if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>代码部署更新记录</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box} 
+        *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:system-ui,sans-serif;background:#f5f6f8;padding:20px}
         .wrap{max-width:950px;margin:0 auto;background:#fff;border-radius:10px;padding:25px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
         h1{font-size:20px;color:#222;margin-bottom:20px;border-bottom:1px solid #eee;padding-bottom:10px}
@@ -91,28 +102,42 @@ if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
     <div class="wrap">
         <h1>项目部署与提交历史</h1>
         <div id="commitList">
+        </div>
+    </div>
+</body>
+</html>
 HTML
-    fi
-    
-    # 生成本次提交的详细信息区块（按时间倒序，最新的在最前面）
-    TEMP_CONTENT=$(git log --pretty=format:" \
-        <div class='commit-item'> \
-            <div class='commit-hash'>%h</div> \
-            <div class='deploy-time'>部署时间：${DEPLOY_TIME}</div> \
-            <div class='commit-time'>提交时间：%ad</div> \
-            <div class='commit-author'>提交人：%an</div> \
-            <div class='commit-msg'>提交说明：%s</div> \
-            <div class='file-list'>变更文件：$(git diff --name-only ${PREV_COMMIT} ${NEW_COMMIT} | tr '\n' ' ')</div> \
-        </div>" \
-        --date=format:"%Y-%m-%d %H:%M:%S" \
-        "${PREV_COMMIT}..${NEW_COMMIT}")
+fi
 
-    # 将新内容插入到 commitList 的开头（最新的在最上面）
-    sed -i -e '/<\/div><\/body><\/html>/d' "${LOG_PAGE}"
-    sed -i -e '/<div id="commitList">/r /dev/stdin' "${LOG_PAGE}" <<< "${TEMP_CONTENT}"
-    echo "</div></body></html>" >> "${LOG_PAGE}"
+# 生成本次提交的详细信息区块
+if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
+    log_info "添加新的提交记录到 HTML..."
+    
+    # 获取变更文件列表
+    CHANGED_FILES=$(git diff --name-only "${PREV_COMMIT}" "${NEW_COMMIT}" 2>/dev/null | tr '\n' ' ' || echo "无")
+    
+    # 生成提交信息 HTML
+    COMMIT_HTML=$(git log --pretty=format:"<div class='commit-item'><div class='commit-hash'>%h</div><div class='deploy-time'>部署时间：${DEPLOY_TIME}</div><div class='commit-time'>提交时间：%ad</div><div class='commit-author'>提交人：%an</div><div class='commit-msg'>提交说明：%s</div><div class='file-list'>变更文件：${CHANGED_FILES}</div></div>" --date=format:"%Y-%m-%d %H:%M:%S" "${PREV_COMMIT}..${NEW_COMMIT}")
+    
+    # 将新内容插入到 commitList 的开头
+    # 先删除结束标签
+    sed -i 's|</div>\s*</body>\s*</html>||' "${LOG_PAGE}"
+    
+    # 插入新内容
+    echo "${COMMIT_HTML}" >> "${LOG_PAGE}"
+    
+    # 添加结束标签
+    echo "        </div>" >> "${LOG_PAGE}"
+    echo "    </div>" >> "${LOG_PAGE}"
+    echo "</body>" >> "${LOG_PAGE}"
+    echo "</html>" >> "${LOG_PAGE}"
+    
+    log_info "提交记录已添加到 HTML"
+else
+    log_info "没有新的提交，跳过 HTML 更新"
 fi
 
 log_info "部署完成!"
+log_info "日志文件: ${LOG_FILE}"
+log_info "部署记录: ${LOG_PAGE}"
 echo "更新记录页面已生成,请访问: http://110.42.255.239/simplUI/deploy/index.html"
-
