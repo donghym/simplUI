@@ -11,13 +11,13 @@ export const mentionsVariants = cva('relative inline-block w-full')
  * 定义文本框的基础样式和禁用状态。
  */
 export const mentionsTextareaVariants = cva(
-  'w-full rounded-md border border-[#d9d9d9] text-[#262626] text-sm leading-normal resize-y px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1',
+  'w-full rounded-md border border-border text-foreground text-sm leading-normal resize-y px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1',
   {
     variants: {
       /** 禁用状态 */
       disabled: {
         /** 禁用时灰色背景，不可交互 */
-        true: 'bg-[#f5f5f5] cursor-not-allowed',
+        true: 'bg-muted cursor-not-allowed',
         /** 正常时白色背景 */
         false: 'bg-white cursor-text',
       },
@@ -45,17 +45,17 @@ export const mentionsOptionVariants = cva(
       /** 是否激活状态 */
       active: {
         /** 激活时蓝色背景 */
-        true: 'bg-[#e6f4ff]',
+        true: 'bg-primary-50',
       },
       /** 是否禁用状态 */
       disabled: {
         /** 禁用时灰色文字 */
-        true: 'text-[#bfbfbf]',
+        true: 'text-muted-foreground',
       },
     },
     compoundVariants: [
       /** 非激活且非禁用时的默认样式 */
-      { active: false, disabled: false, className: 'bg-transparent text-[#262626]' },
+      { active: false, disabled: false, className: 'bg-transparent text-foreground' },
     ],
     defaultVariants: { active: false, disabled: false },
   },

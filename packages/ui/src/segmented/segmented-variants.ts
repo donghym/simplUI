@@ -6,7 +6,7 @@ import { cva } from 'class-variance-authority'
  * 分段控制器外层容器的基础样式。
  */
 export const segmentedVariants = cva(
-  'inline-flex rounded-md bg-[#f5f5f5] p-0.5',
+  'inline-flex rounded-md bg-muted p-0.5',
 )
 
 /**
@@ -23,12 +23,12 @@ export const segmentedItemVariants = cva(
         /** 激活时显示白色背景和主题色文字 */
         true: 'bg-white text-primary-600 font-medium shadow-[0_2px_4px_rgba(0,0,0,0.1)] ring-1 ring-gray-200',
         /** 非激活时显示透明背景 */
-        false: 'bg-transparent text-[#595959] font-normal shadow-none',
+        false: 'bg-transparent text-muted-foreground font-normal shadow-none',
       },
       /** 是否禁用状态 */
       disabled: {
         /** 禁用时不可点击，灰色文字 */
-        true: 'cursor-not-allowed text-[#bfbfbf]',
+        true: 'cursor-not-allowed text-muted-foreground',
         /** 正常时可点击 */
         false: 'cursor-pointer',
       },
@@ -44,7 +44,7 @@ export const segmentedItemVariants = cva(
     },
     compoundVariants: [
       /** 激活且禁用时的复合样式 */
-      { active: true, disabled: true, className: 'bg-white text-[#bfbfbf]' },
+      { active: true, disabled: true, className: 'bg-white text-muted-foreground' },
     ],
     defaultVariants: { active: false, disabled: false, size: 'middle' },
   },

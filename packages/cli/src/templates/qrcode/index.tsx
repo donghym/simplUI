@@ -50,7 +50,7 @@ export const QRCode = forwardRef<HTMLDivElement, QRCodeProps>(({
     >
       {isLoading ? (
         <div
-          className="flex items-center justify-center text-[#bfbfbf]"
+          className="flex items-center justify-center text-muted-foreground"
           style={{ width: size, height: size }}
         >
           <svg width="32" height="32" viewBox="0 0 32 32">
@@ -98,14 +98,14 @@ export const QRCode = forwardRef<HTMLDivElement, QRCodeProps>(({
           )}
           {(isExpired || isScanned) && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-              <span className="text-[#595959] text-sm">
+              <span className="text-muted-foreground text-sm">
                 {isExpired ? '二维码已过期' : '已扫描'}
               </span>
               {isExpired && onRefresh && (
                 <button
                   type="button"
                   onClick={onRefresh}
-                  className="px-3 py-1 border border-[#d9d9d9] rounded bg-white cursor-pointer text-sm"
+                  className="px-3 py-1 border border-border rounded bg-white cursor-pointer text-sm"
                 >
                   点击刷新
                 </button>

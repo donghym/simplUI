@@ -6,7 +6,7 @@ export const qrcodeVariants = cva(
   {
     variants: {
       bordered: {
-        true: 'p-3 border border-[#f0f0f0] rounded-lg',
+        true: 'p-3 border border-border rounded-lg',
         false: '',
       },
     },

@@ -22,7 +22,7 @@ const renderList = ({ items, selected, toggle, search, setSearch, title, showSea
     <div className={transferHeaderVariants()}>{title}</div>
     {showSearch && (
       <div className="p-2">
-        <input type="text" placeholder={searchPlaceholder} value={search} onChange={(e) => setSearch(e.target.value)} className="w-full px-2 py-1 border border-[#d9d9d9] rounded text-sm" />
+        <input type="text" placeholder={searchPlaceholder} value={search} onChange={(e) => setSearch(e.target.value)} className="w-full px-2 py-1 border border-border rounded text-sm" />
       </div>
     )}
     <div className="sui-transfer__body flex-1 overflow-auto p-1">

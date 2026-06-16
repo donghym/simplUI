@@ -30,7 +30,7 @@ describe('FloatButton', () => {
   it('applies primary type style', () => {
     render(<FloatButton icon={<span data-testid="icon">收藏</span>} type="primary" />)
     const el = screen.getByTestId('icon').parentElement
-    expect(el?.className).toContain('bg-[#1677FF]')
+    expect(el?.className).toContain('bg-primary-500')
   })
 
   it('applies square shape', () => {

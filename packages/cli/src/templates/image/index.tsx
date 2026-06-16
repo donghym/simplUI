@@ -65,7 +65,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(({
   if (error && fallback) {
     return (
       <div
-        className={cn(imageVariants({ error: true }), 'flex items-center justify-center bg-[#f5f5f5]', className)}
+        className={cn(imageVariants({ error: true }), 'flex items-center justify-center bg-muted', className)}
         style={{ width, height, ...style }}
       >
         {fallback}
@@ -82,7 +82,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(({
       >
         {!loaded && placeholder && (
           <div
-            className="sui-image__placeholder absolute inset-0 flex items-center justify-center bg-[#f5f5f5]"
+            className="sui-image__placeholder absolute inset-0 flex items-center justify-center bg-muted"
           >
             {placeholder}
           </div>
@@ -100,7 +100,7 @@ export const Image = forwardRef<HTMLDivElement, ImageProps>(({
       </div>
       {previewOpen && (
         <div
-          className="sui-image-preview fixed inset-0 z-[1080] bg-[rgba(0,0,0,0.45)] flex items-center justify-center cursor-zoom-out"
+          className="sui-image-preview fixed inset-0 z-[1080] bg-black/45 flex items-center justify-center cursor-zoom-out"
           onClick={closePreview}
         >
           <img

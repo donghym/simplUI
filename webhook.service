@@ -1,0 +1,19 @@
+[Unit]
+Description=SimplUI Webhook Auto Deploy Service
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/var/www/UI2/simplUI
+Environment="WEBHOOK_SECRET=your-secret-key-here"
+Environment="NODE_ENV=production"
+ExecStart=/usr/bin/node /var/www/UI2/simplUI/webhook.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=simplui-webhook
+
+[Install]
+WantedBy=multi-user.target

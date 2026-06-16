@@ -6,8 +6,8 @@ export const floatButtonVariants = cva(
   {
     variants: {
       type: {
-        default: 'bg-white text-[#262626] border border-[#f0f0f0]',
-        primary: 'bg-[#1677FF] text-white border-none',
+        default: 'bg-white text-foreground border border-border',
+        primary: 'bg-primary-500 text-white border-none',
       },
       shapeVariant: {
         circle: 'w-10 rounded-full p-0',
@@ -20,7 +20,7 @@ export const floatButtonVariants = cva(
 
 /** 悬浮按钮提示气泡变体 */
 export const floatButtonTooltipVariants = cva(
-  'absolute bg-[#262626] text-white px-2 py-1 rounded text-xs whitespace-nowrap z-[1070]',
+  'absolute bg-foreground text-white px-2 py-1 rounded text-xs whitespace-nowrap z-[1070]',
   {
     variants: {
       placement: {

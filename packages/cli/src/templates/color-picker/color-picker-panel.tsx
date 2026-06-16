@@ -114,7 +114,7 @@ export const ColorPickerPanel: React.FC<PanelProps> = ({
           className="h-3 rounded-full cursor-pointer relative bg-[linear-gradient(to_right,#f00_0%,#ff0_17%,#0f0_33%,#0ff_50%,#00f_67%,#f0f_83%,#f00_100%)]"
         >
           <div
-            className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[14px] h-[14px] rounded-full bg-white border-2 border-[#1677ff] shadow-[0_1px_3px_rgba(0,0,0,0.2)] pointer-events-none"
+            className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[14px] h-[14px] rounded-full bg-white border-2 border-primary-500 shadow-[0_1px_3px_rgba(0,0,0,0.2)] pointer-events-none"
             style={{ left: `${(hsv.h / 360) * 100}%` }}
           />
         </div>
@@ -124,7 +124,7 @@ export const ColorPickerPanel: React.FC<PanelProps> = ({
       <div className="flex items-center gap-1 mb-2">
         <div
           onClick={onFormatCycle}
-          className="flex-1 px-2 py-1 border border-[#d9d9d9] rounded text-xs font-mono text-[#333] cursor-pointer select-none text-center"
+          className="flex-1 px-2 py-1 border border-border rounded text-xs font-mono text-foreground cursor-pointer select-none text-center"
           title="Click to switch format"
         >
           {formatValue}
@@ -132,7 +132,7 @@ export const ColorPickerPanel: React.FC<PanelProps> = ({
         {allowClear && (
           <div
             onClick={onClear}
-            className="px-2 py-1 border border-[#d9d9d9] rounded text-xs text-[#666] cursor-pointer select-none whitespace-nowrap"
+            className="px-2 py-1 border border-border rounded text-xs text-muted-foreground cursor-pointer select-none whitespace-nowrap"
           >
             Clear
           </div>
@@ -142,7 +142,7 @@ export const ColorPickerPanel: React.FC<PanelProps> = ({
       {/* presets */}
       {mergedPresets.map((group) => (
         <div key={group.label} className="mb-1">
-          <div className="text-[11px] text-[#999] mb-1 select-none">
+          <div className="text-[11px] text-muted-foreground mb-1 select-none">
             {group.label}
           </div>
           <div className="flex flex-wrap gap-1">

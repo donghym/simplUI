@@ -7,6 +7,14 @@ import {
   descriptionsBorderedLabelVariants,
   descriptionsBorderedContentVariants,
 } from './descriptions-variants'
+
+export {
+  descriptionsTitleVariants,
+  descriptionsLabelVariants,
+  descriptionsContentVariants,
+  descriptionsBorderedLabelVariants,
+  descriptionsBorderedContentVariants,
+}
 import type { DescriptionsProps, DescriptionsItemProps } from './types'
 
 export type { DescriptionsProps, DescriptionsItemProps }

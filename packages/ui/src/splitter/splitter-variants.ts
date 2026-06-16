@@ -16,7 +16,7 @@ export const splitterVariants = cva(
 
 /** 分隔条变体 */
 export const splitterBarVariants = cva(
-  'sui-splitter__bar shrink-0 bg-[#f0f0f0] transition-[background] duration-200',
+  'sui-splitter__bar shrink-0 bg-muted transition-[background] duration-200',
   {
     variants: {
       layout: {

@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority'
 
 /** 颜色选择器触发器变体 */
 export const colorPickerTriggerVariants = cva(
-  'rounded-md border border-[#d9d9d9] flex items-center justify-center transition-[border-color] duration-200 shrink-0 overflow-hidden',
+  'rounded-md border border-border flex items-center justify-center transition-[border-color] duration-200 shrink-0 overflow-hidden',
   {
     variants: {
       size: {
@@ -21,7 +21,7 @@ export const colorPickerTriggerVariants = cva(
 
 /** 颜色选择器输入框变体 */
 export const colorPickerInputVariants = cva(
-  'w-20 border border-[#d9d9d9] rounded-md px-2 py-1 text-[#262626] outline-none font-mono transition-[border-color,box-shadow] duration-200 focus:border-[#1677ff] focus:shadow-[0_0_0_2px_rgba(22,119,255,0.15)]',
+  'w-20 border border-border rounded-md px-2 py-1 text-foreground outline-none font-mono transition-[border-color,box-shadow] duration-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20',
   {
     variants: {
       size: {
@@ -40,8 +40,8 @@ export const presetSwatchVariants = cva(
   {
     variants: {
       selected: {
-        true: 'scale-[1.15] border-2 border-[#1677ff]',
-        false: 'border border-[rgba(0,0,0,0.08)]',
+        true: 'scale-[1.15] border-2 border-primary-500',
+        false: 'border border-border',
       },
     },
     defaultVariants: { selected: false },
