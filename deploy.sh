@@ -3,14 +3,14 @@ set -euo pipefail
 
 # ================= 基础配置 =================
 # 1. 修改为你的项目实际路径
-PROJECT_DIR="/var/www/UI/RustUI"
+PROJECT_DIR="/var/www/UI2/SimplUI"
 
 # 2. 修改为你的日志页面存放路径（刚才创建的目录）
-LOG_DIR="/var/www/UI/deploy_logs"
+LOG_DIR="/var/www/UI2/SimplUI/deploy"
 LOG_PAGE="${LOG_DIR}/index.html"
 
 # 3. Nginx 静态文件目录
-NGINX_ROOT="/var/www/UI/RustUI/dist-docs"
+NGINX_ROOT="/var/www/UI2/SimplUI/storybook-static"
 
 # 日志输出函数
 log_info() {
@@ -52,7 +52,7 @@ fi
 pnpm install
 
 log_info "构建文档..."
-npm run docs:build
+npm run storybook:build
 
 log_info "部署静态文件到 Nginx 目录..."
 # rm -rf "${NGINX_ROOT:?}"/*
@@ -114,5 +114,5 @@ HTML
 fi
 
 log_info "部署完成!"
-echo "更新记录页面已生成,请访问: http://110.42.255.239/simplUI/deploy_logs/index.html"
+echo "更新记录页面已生成,请访问: http://110.42.255.239/simplUI/deploy/index.html"
 
