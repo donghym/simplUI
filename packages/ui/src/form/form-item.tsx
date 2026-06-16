@@ -3,7 +3,7 @@ import { cn } from '../lib/utils'
 import { formItemVariants } from './form-variants'
 import { VALIDATE_COLORS, VALIDATE_BORDER, RequiredMark, normalizeCol } from './form-utils'
 import { useFormContext } from './form'
-import type { FormItemProps, FormLayout } from './types'
+import type { FormItemProps } from './types'
 import type { ResponsiveCol } from './responsive-col-types'
 
 /**

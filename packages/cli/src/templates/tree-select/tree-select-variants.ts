@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority'
  * TreeSelect 选择器变体样式
  */
 export const treeSelectVariants = cva(
-  'relative flex h-[40px] w-full cursor-pointer items-center justify-between ' +
+  'relative flex h-9 w-full cursor-pointer items-center justify-between ' +
     'rounded-md border border-border bg-background px-3 text-sm ' +
     'transition-colors duration-200 ' +
     'focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-1 ' +
