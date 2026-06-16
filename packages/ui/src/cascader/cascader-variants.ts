@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority'
 
 /** 级联选择器输入框变体样式 */
 export const cascaderVariants = cva(
-  'flex h-[40px] w-full rounded-md border border-gray-400 bg-white px-3 text-sm transition-colors ' +
+  'flex h-9 w-full rounded-md border border-gray-400 bg-white px-3 text-sm transition-colors ' +
     'cursor-pointer items-center justify-between ' +
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ' +
     'disabled:cursor-not-allowed disabled:opacity-50',

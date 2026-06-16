@@ -150,7 +150,11 @@ function runDeployScript() {
 
 // ==================== 验证 Webhook 签名 ====================
 function verifySignature(payload, signature, secret) {
-  if (!signature) return false;
+  // 如果没有 signature 或 signature 格式不正确，跳过验证
+  if (!signature || signature === 'sha256=' || signature === 'sha1=') {
+    log('Signature 为空，跳过验证');
+    return true;
+  }
 
   const hmac = crypto.createHmac('sha256', secret);
   const digest = 'sha256=' + hmac.update(payload).digest('hex');

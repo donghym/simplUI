@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority'
 
 /** 搜索输入框变体样式 */
 export const searchInputVariants = cva(
-  'flex h-[40px] w-full rounded-md border border-gray-400 bg-white pl-9 pr-3 text-sm transition-colors ' +
+  'flex h-9 w-full rounded-md border border-gray-400 bg-white pl-9 pr-3 text-sm transition-colors ' +
     'placeholder:text-muted-foreground ' +
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ' +
     'disabled:cursor-not-allowed disabled:opacity-50',

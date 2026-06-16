@@ -13,7 +13,7 @@ export const selectVariants = cva(
       },
       componentSize: {
         large: 'h-10 px-4 text-base',
-        default: 'h-[40px] px-3 text-sm',
+        default: 'h-9 px-3 text-sm',
         small: 'h-7 px-2 text-xs',
       },
       open: {
