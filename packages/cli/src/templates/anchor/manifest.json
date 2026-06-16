@@ -1,0 +1,14 @@
+{
+  "name": "anchor",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "anchor-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Anchor navigation component"
+}

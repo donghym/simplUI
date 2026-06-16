@@ -1,0 +1,13 @@
+{
+  "name": "layout",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "layout-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Layout container with Header/Sider/Content/Footer sections"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "skeleton",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "skeleton-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Skeleton loading placeholder component"
+}

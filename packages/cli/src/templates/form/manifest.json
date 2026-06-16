@@ -1,0 +1,15 @@
+{
+  "name": "form",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "form-variants.ts",
+    "form-utils.tsx",
+    "types.ts",
+    "responsive-col-types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Form container with FormItem for validation and field management"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "morph-button",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "morph-button-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "MorphButton with morphing animation effect"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "step-form",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "step-form-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "StepForm with multi-step form wizard"
+}

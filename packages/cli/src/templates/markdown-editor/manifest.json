@@ -1,0 +1,14 @@
+{
+  "name": "markdown-editor",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "markdown-editor-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "MarkdownEditor for markdown editing and preview"
+}

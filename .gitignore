@@ -1,0 +1,12 @@
+node_modules
+dist
+.DS_Store
+coverage
+*.log
+.env*
+.turbo
+.pnpm-store
+
+# 手动演示项目，单独成立的文件夹，临时保留
+storybook-demo/
+.pnpm-store/

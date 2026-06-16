@@ -1,0 +1,10 @@
+{
+  "name": "flex",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "types.ts"
+  ],
+  "dependencies": [],
+  "description": "Flex container with direction, wrap, justify, align support"
+}

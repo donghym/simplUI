@@ -1,0 +1,13 @@
+{
+  "name": "grid",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "grid-utils.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Grid system with Row and Col components for responsive layouts"
+}

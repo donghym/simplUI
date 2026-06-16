@@ -1,0 +1,13 @@
+{
+  "name": "card",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "card-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Card container with header, body, and footer sections"
+}

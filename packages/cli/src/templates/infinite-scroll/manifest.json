@@ -1,0 +1,14 @@
+{
+  "name": "infinite-scroll",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "infinite-scroll-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "InfiniteScroll for endless list loading"
+}

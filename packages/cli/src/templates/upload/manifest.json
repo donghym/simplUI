@@ -1,0 +1,15 @@
+{
+  "name": "upload",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "upload-variants.ts",
+    "upload-types.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "File upload component with drag-drop and preview support"
+}

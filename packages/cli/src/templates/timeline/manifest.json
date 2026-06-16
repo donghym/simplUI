@@ -1,0 +1,13 @@
+{
+  "name": "timeline",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "timeline-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Timeline vertical list component with status variants"
+}

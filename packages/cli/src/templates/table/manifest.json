@@ -1,0 +1,16 @@
+{
+  "name": "table",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "table-variants.ts",
+    "table-header.tsx",
+    "table-row.tsx",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Table component with sorting, selection, and pagination support"
+}

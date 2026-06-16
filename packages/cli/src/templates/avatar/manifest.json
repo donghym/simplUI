@@ -1,0 +1,14 @@
+{
+  "name": "avatar",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "avatar-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Avatar component with image, icon, and text fallback"
+}

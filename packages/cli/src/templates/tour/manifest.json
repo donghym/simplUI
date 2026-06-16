@@ -1,0 +1,10 @@
+{
+  "name": "tour",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "types.ts"
+  ],
+  "dependencies": [],
+  "description": "Tour guide for feature walkthrough"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "list",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "list-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "List component with header, footer, and loading state"
+}

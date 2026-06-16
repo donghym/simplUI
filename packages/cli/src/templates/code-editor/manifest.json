@@ -1,0 +1,14 @@
+{
+  "name": "code-editor",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "code-editor-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "CodeEditor for code editing with syntax highlight"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "time-picker",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "time-picker-variants.ts",
+    "time-picker-utils.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Time picker with hour/minute/second selection"
+}

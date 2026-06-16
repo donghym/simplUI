@@ -1,0 +1,13 @@
+{
+  "name": "result",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "result-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Result page for success/error/info/warning states"
+}

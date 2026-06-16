@@ -1,0 +1,14 @@
+{
+  "name": "hover-card",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "hover-card-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "HoverCard with hover-triggered card reveal"
+}

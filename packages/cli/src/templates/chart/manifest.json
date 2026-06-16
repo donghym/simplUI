@@ -1,0 +1,13 @@
+{
+  "name": "chart",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "chart-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Chart wrapper component for data visualization"
+}

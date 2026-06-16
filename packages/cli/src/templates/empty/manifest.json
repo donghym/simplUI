@@ -1,0 +1,14 @@
+{
+  "name": "empty",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "empty-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Empty state placeholder component"
+}

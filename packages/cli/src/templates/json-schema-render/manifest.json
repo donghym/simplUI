@@ -1,0 +1,14 @@
+{
+  "name": "json-schema-render",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "json-schema-render-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "JsonSchemaRender for JSON schema-based rendering"
+}

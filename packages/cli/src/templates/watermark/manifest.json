@@ -1,0 +1,10 @@
+{
+  "name": "watermark",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "types.ts"
+  ],
+  "dependencies": [],
+  "description": "Watermark overlay component"
+}

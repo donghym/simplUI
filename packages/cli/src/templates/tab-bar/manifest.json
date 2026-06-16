@@ -1,0 +1,14 @@
+{
+  "name": "tab-bar",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "tab-bar-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "TabBar mobile bottom navigation"
+}

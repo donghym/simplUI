@@ -1,0 +1,14 @@
+{
+  "name": "steps",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "steps-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Steps progress indicator component"
+}

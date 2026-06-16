@@ -1,0 +1,13 @@
+{
+  "name": "tooltip",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "tooltip-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Tooltip text hint with hover/focus/click trigger"
+}

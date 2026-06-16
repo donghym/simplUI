@@ -1,0 +1,10 @@
+{
+  "name": "descriptions",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "types.ts"
+  ],
+  "dependencies": [],
+  "description": "Descriptions list for displaying key-value pairs"
+}

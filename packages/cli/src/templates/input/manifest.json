@@ -1,0 +1,14 @@
+{
+  "name": "input",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "input-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Input component with status variants, prefix/suffix, and clear button"
+}

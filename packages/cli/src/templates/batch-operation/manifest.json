@@ -1,0 +1,14 @@
+{
+  "name": "batch-operation",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "batch-operation-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "BatchOperation for bulk actions toolbar"
+}

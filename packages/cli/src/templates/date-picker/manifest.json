@@ -1,0 +1,15 @@
+{
+  "name": "date-picker",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "date-picker-variants.ts",
+    "date-picker-utils.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Date picker with calendar popup and range selection"
+}

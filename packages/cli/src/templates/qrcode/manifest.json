@@ -1,0 +1,10 @@
+{
+  "name": "qrcode",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "types.ts"
+  ],
+  "dependencies": [],
+  "description": "QRCode generator component"
+}

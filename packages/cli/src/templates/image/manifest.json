@@ -1,0 +1,10 @@
+{
+  "name": "image",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "types.ts"
+  ],
+  "dependencies": [],
+  "description": "Image component with preview and placeholder support"
+}

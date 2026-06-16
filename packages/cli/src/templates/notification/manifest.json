@@ -1,0 +1,14 @@
+{
+  "name": "notification",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "notification-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Notification alert component with closable support"
+}

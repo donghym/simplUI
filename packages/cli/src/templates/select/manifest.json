@@ -1,0 +1,14 @@
+{
+  "name": "select",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "select-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Select dropdown with single/multiple selection support"
+}

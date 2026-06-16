@@ -1,0 +1,17 @@
+{
+  "name": "pro-form",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "pro-form-variants.ts",
+    "pro-form-list.tsx",
+    "pro-form-select.tsx",
+    "pro-form-text.tsx",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "ProForm with schema-based form generation"
+}

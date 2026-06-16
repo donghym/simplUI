@@ -1,0 +1,14 @@
+{
+  "name": "star-rating",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "star-rating-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "StarRating with animated star rating"
+}

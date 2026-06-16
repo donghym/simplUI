@@ -1,0 +1,14 @@
+{
+  "name": "modal",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "modal-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Modal dialog with focus trap and ESC close support"
+}

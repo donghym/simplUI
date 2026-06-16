@@ -1,0 +1,14 @@
+{
+  "name": "pull-to-refresh",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "pull-to-refresh-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "PullToRefresh mobile pull gesture refresh"
+}

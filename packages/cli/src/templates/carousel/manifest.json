@@ -1,0 +1,13 @@
+{
+  "name": "carousel",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "carousel-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Carousel slideshow component"
+}

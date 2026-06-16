@@ -1,0 +1,14 @@
+{
+  "name": "enhance-descriptions",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "enhance-descriptions-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "EnhanceDescriptions with editable and collapsible support"
+}

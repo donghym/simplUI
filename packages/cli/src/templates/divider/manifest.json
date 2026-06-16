@@ -1,0 +1,13 @@
+{
+  "name": "divider",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "divider-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Divider line for separating content sections"
+}

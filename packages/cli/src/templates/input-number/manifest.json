@@ -1,0 +1,15 @@
+{
+  "name": "input-number",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "input-number-variants.ts",
+    "input-number-utils.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Number input with stepper controls and min/max validation"
+}

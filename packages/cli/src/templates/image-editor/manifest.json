@@ -1,0 +1,16 @@
+{
+  "name": "image-editor",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "image-editor-variants.ts",
+    "image-editor-canvas.ts",
+    "image-editor-utils.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "ImageEditor for image cropping and editing"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "thought-chain",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "thought-chain-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "ThoughtChain for displaying AI reasoning steps"
+}

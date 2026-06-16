@@ -1,0 +1,14 @@
+{
+  "name": "radio",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "radio-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Radio component with group support"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "collapse",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "collapse-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Collapse accordion panel component"
+}

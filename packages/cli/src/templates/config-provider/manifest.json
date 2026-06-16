@@ -1,0 +1,13 @@
+{
+  "name": "config-provider",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "config-provider-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "ConfigProvider global configuration component"
+}

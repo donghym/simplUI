@@ -1,0 +1,10 @@
+{
+  "name": "splitter",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "types.ts"
+  ],
+  "dependencies": [],
+  "description": "Splitter panel for resizable layouts"
+}

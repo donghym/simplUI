@@ -1,0 +1,15 @@
+{
+  "name": "wired-element",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "wired-element-variants.ts",
+    "wired-element-utils.ts",
+    "wired-element-background.tsx",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "WiredElement with hand-drawn wireframe style"
+}

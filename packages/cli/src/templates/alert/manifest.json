@@ -1,0 +1,10 @@
+{
+  "name": "alert",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "types.ts"
+  ],
+  "dependencies": [],
+  "description": "Alert component with success/info/warning/error types"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "search-input",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "search-input-variants.ts",
+    "search-input-utils.ts",
+    "highlight-text.tsx",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "SearchInput with highlight and suggestion support"
+}

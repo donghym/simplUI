@@ -1,0 +1,14 @@
+{
+  "name": "scroll-reveal",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "scroll-reveal-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "ScrollReveal with scroll-triggered reveal animation"
+}

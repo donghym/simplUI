@@ -1,0 +1,14 @@
+{
+  "name": "action-sheet",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "action-sheet-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "ActionSheet mobile action menu"
+}

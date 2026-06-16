@@ -1,0 +1,14 @@
+{
+  "name": "elastic-toggle",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "elastic-toggle-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "ElasticToggle with elastic bounce animation"
+}

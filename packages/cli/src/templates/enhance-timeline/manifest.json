@@ -1,0 +1,14 @@
+{
+  "name": "enhance-timeline",
+  "version": "1.0.0",
+  "files": [
+    "index.tsx",
+    "enhance-timeline-variants.ts",
+    "types.ts"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "EnhanceTimeline with interactive timeline items"
+}
