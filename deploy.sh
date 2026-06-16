@@ -76,7 +76,7 @@ mkdir -p "${LOG_DIR}"
 # 如果是首次部署,创建 HTML 骨架
 if [ ! -f "${LOG_PAGE}" ]; then
     log_info "创建首次部署的 HTML 页面..."
-    cat > "${LOG_PAGE}" <<'HTML'
+    cat > "${LOG_PAGE}" << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -88,6 +88,7 @@ if [ ! -f "${LOG_PAGE}" ]; then
         body{font-family:system-ui,sans-serif;background:#f5f6f8;padding:20px}
         .wrap{max-width:950px;margin:0 auto;background:#fff;border-radius:10px;padding:25px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
         h1{font-size:20px;color:#222;margin-bottom:20px;border-bottom:1px solid #eee;padding-bottom:10px}
+        .commit-list{padding:0}
         .commit-item{padding:15px;border-left:4px solid #2563eb;margin-bottom:12px;background:#f8fafc;border-radius:6px}
         .commit-hash{font-family:monospace;color:#2563eb;font-weight:bold;font-size:14px}
         .deploy-time{font-size:13px;color:#16a34a;margin:4px 0;font-weight:bold}
@@ -101,12 +102,12 @@ if [ ! -f "${LOG_PAGE}" ]; then
 <body>
     <div class="wrap">
         <h1>项目部署与提交历史</h1>
-        <div id="commitList">
+        <div class="commit-list" id="commitList">
         </div>
     </div>
 </body>
 </html>
-HTML
+HTMLEOF
 fi
 
 # 生成本次提交的详细信息区块
@@ -119,18 +120,22 @@ if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
     # 生成提交信息 HTML
     COMMIT_HTML=$(git log --pretty=format:"<div class='commit-item'><div class='commit-hash'>%h</div><div class='deploy-time'>部署时间：${DEPLOY_TIME}</div><div class='commit-time'>提交时间：%ad</div><div class='commit-author'>提交人：%an</div><div class='commit-msg'>提交说明：%s</div><div class='file-list'>变更文件：${CHANGED_FILES}</div></div>" --date=format:"%Y-%m-%d %H:%M:%S" "${PREV_COMMIT}..${NEW_COMMIT}")
     
-    # 将新内容插入到 commitList 的开头
-    # 先删除结束标签
-    sed -i 's|</div>\s*</body>\s*</html>||' "${LOG_PAGE}"
+    log_info "生成的提交记录: ${COMMIT_HTML:0:100}..."
     
-    # 插入新内容
-    echo "${COMMIT_HTML}" >> "${LOG_PAGE}"
+    # 使用临时文件方式插入新内容
+    TEMP_FILE=$(mktemp)
     
-    # 添加结束标签
-    echo "        </div>" >> "${LOG_PAGE}"
-    echo "    </div>" >> "${LOG_PAGE}"
-    echo "</body>" >> "${LOG_PAGE}"
-    echo "</html>" >> "${LOG_PAGE}"
+    # 读取原文件，在 commitList div 后插入新内容
+    awk -v content="${COMMIT_HTML}" '
+        /<div class="commit-list" id="commitList">/ {
+            print
+            print content
+            next
+        }
+        { print }
+    ' "${LOG_PAGE}" > "${TEMP_FILE}"
+    
+    mv "${TEMP_FILE}" "${LOG_PAGE}"
     
     log_info "提交记录已添加到 HTML"
 else
