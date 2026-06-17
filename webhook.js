@@ -16,7 +16,7 @@ const CONFIG = {
   port: 9002,
 
   // 项目路径
-  projectDir: '/var/www/UI2/simplUI',
+  projectDir: '/var/www/UI/simplUI',
 
   // Git 仓库地址
   gitRepo: 'https://donghy.top/git/admin/simplUI.git',
@@ -25,13 +25,13 @@ const CONFIG = {
   branch: 'main',
 
   // deploy.sh 脚本路径
-  deployScript: '/var/www/UI2/simplUI/deploy.sh',
+  deployScript: '/var/www/UI/simplUI/deploy.sh',
 
   // Webhook Secret (用于验证请求)
   secret: process.env.WEBHOOK_SECRET || 'your-secret-key-here',
 
   // 日志文件路径
-  logFile: '/var/www/UI2/simplUI/deploy/webhook.log',
+  logFile: '/var/www/UI/simplUI/deploy/webhook.log',
 
   // 部署锁文件（防止并发部署）
   lockFile: '/tmp/simplui-deploy.lock',
