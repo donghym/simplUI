@@ -6,7 +6,7 @@
 
 ```bash
 # 进入项目目录
-cd /var/www/UI2/simplUI
+cd /var/www/UI/simplUI
 
 # 执行安装脚本（需要 root 权限）
 sudo bash deploy/setup.sh
@@ -16,7 +16,7 @@ sudo bash deploy/setup.sh
 
 1. 进入 GitHub 仓库 → Settings → Webhooks → Add webhook
 2. 填写配置：
-   - **Payload URL**: `http://donghy.top/webhook/ui2`
+   - **Payload URL**: `http://donghy.top/webhook/UI`
    - **Content type**: `application/json`
    - **Secret**: `your-secret-key-here`（建议修改为自定义密钥）
    - **Events**: 选择 "Just the push event"
@@ -26,7 +26,7 @@ sudo bash deploy/setup.sh
 
 ```bash
 # 检查 webhook 服务状态
-curl http://donghy.top/webhook/ui2/health
+curl http://donghy.top/webhook/UI/health
 
 # 手动触发部署
 curl -X POST -H 'Authorization: Bearer your-secret-key-here' http://localhost:9002/deploy
@@ -47,7 +47,7 @@ sudo journalctl -u simplui-webhook -f
 ## 目录结构
 
 ```
-/var/www/UI2/simplUI/
+/var/www/UI/simplUI/
 ├── storybook-static/      # Storybook 构建输出
 ├── deploy/
 │   ├── webhook-server.js  # Webhook 服务
@@ -62,15 +62,15 @@ sudo journalctl -u simplui-webhook -f
 
 ```bash
 # 修复权限
-sudo chown -R ubuntu:ubuntu /var/www/UI2
-sudo chmod -R 755 /var/www/UI2
+sudo chown -R ubuntu:ubuntu /var/www/UI
+sudo chmod -R 755 /var/www/UI
 ```
 
 ### 2. 构建失败
 
 ```bash
 # 手动执行构建排查问题
-cd /var/www/UI2/simplUI
+cd /var/www/UI/simplUI
 pnpm install
 pnpm run storybook:build
 ```

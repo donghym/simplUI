@@ -13,7 +13,7 @@
 
 ```bash
 # 在本地执行，将文件上传到服务器
-scp webhook.js webhook.service ubuntu@110.42.255.239:/var/www/UI2/simplUI/
+scp webhook.js webhook.service ubuntu@110.42.255.239:/var/www/UI/simplUI/
 ```
 
 ### 2. 服务器上配置
@@ -23,7 +23,7 @@ scp webhook.js webhook.service ubuntu@110.42.255.239:/var/www/UI2/simplUI/
 ssh ubuntu@110.42.255.239
 
 # 进入项目目录
-cd /var/www/UI2/simplUI
+cd /var/www/UI/simplUI
 
 # 修改 webhook.js 权限
 chmod +x webhook.js
@@ -37,7 +37,7 @@ vim webhook.js
 
 ```bash
 # 复制服务文件
-sudo cp /var/www/UI2/simplUI/webhook.service /etc/systemd/system/
+sudo cp /var/www/UI/simplUI/webhook.service /etc/systemd/system/
 
 # 修改服务配置中的 Secret（重要！）
 sudo vim /etc/systemd/system/webhook.service
@@ -62,7 +62,7 @@ sudo systemctl status simplui-webhook
 
 ```nginx
 # Webhook 服务
-location /webhook/ui2 {
+location /webhook/UI {
     proxy_pass http://127.0.0.1:9002/webhook;
     proxy_http_version 1.1;
     proxy_set_header Host $host;
@@ -83,7 +83,7 @@ location /webhook/ui2 {
 }
 
 # Webhook 健康检查
-location /webhook/ui2/health {
+location /webhook/UI/health {
     proxy_pass http://127.0.0.1:9002/health;
     proxy_http_version 1.1;
     access_log off;
@@ -103,7 +103,7 @@ sudo nginx -t && sudo systemctl reload nginx
 1. 进入仓库 → Settings → Webhooks → Add Webhook
 2. 选择 **Gitea** 类型
 3. 填写配置：
-   - **Target URL**: `https://donghy.top/webhook/ui2`
+   - **Target URL**: `https://donghy.top/webhook/UI`
    - **Secret**: `your-secret-key-here`（与 webhook.service 中的一致）
    - **Trigger On**: 勾选 **Push events**
    - **Branch filter**: `main`（或你的分支名）
@@ -113,10 +113,10 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ```bash
 # 测试健康检查
-curl https://donghy.top/webhook/ui2/health
+curl https://donghy.top/webhook/UI/health
 
 # 手动触发部署（替换为你的 secret）
-curl -X POST -H 'Authorization: Bearer your-secret-key-here' https://donghy.top/webhook/ui2/deploy
+curl -X POST -H 'Authorization: Bearer your-secret-key-here' https://donghy.top/webhook/UI/deploy
 
 # 查看日志
 sudo journalctl -u simplui-webhook -f
@@ -138,7 +138,7 @@ sudo systemctl restart simplui-webhook
 sudo systemctl stop simplui-webhook
 
 # 查看 webhook 日志文件
-tail -f /var/www/UI2/simplUI/deploy/webhook.log
+tail -f /var/www/UI/simplUI/deploy/webhook.log
 ```
 
 ## 部署流程

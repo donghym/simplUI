@@ -5,10 +5,10 @@ After=network.target
 [Service]
 Type=simple
 User=ubuntu
-WorkingDirectory=/var/www/UI2/simplUI
+WorkingDirectory=/var/www/UI/simplUI
 Environment="WEBHOOK_SECRET=your-secret-key-here"
 Environment="NODE_ENV=production"
-ExecStart=/usr/bin/node /var/www/UI2/simplUI/webhook.js
+ExecStart=/usr/bin/node /var/www/UI/simplUI/webhook.js
 Restart=always
 RestartSec=10
 StandardOutput=journal
