@@ -48,7 +48,7 @@ fi
 pnpm install
 
 log_info "构建文档..."
-npm run docs:build
+npm run storybook:build
 
 log_info "部署静态文件到 Nginx 目录..."
 # rm -rf "${NGINX_ROOT:?}"/*
