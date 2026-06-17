@@ -1,6 +1,10 @@
 import type { ColResponsive } from './types'
 
-/** 根据 span/offset 生成 Tailwind 任意值类名 */
+/**
+ * 根据 span/offset 生成 Tailwind 任意值类名
+ *
+ * 基于 24 列栅格系统计算百分比宽度。
+ */
 export function getSpanClass(span?: number, offset?: number): string {
   const classes: string[] = []
   if (span !== undefined && span > 0 && span <= 24) {
@@ -12,7 +16,11 @@ export function getSpanClass(span?: number, offset?: number): string {
   return classes.join(' ')
 }
 
-/** 生成响应式列类名 */
+/**
+ * 生成响应式列类名
+ *
+ * 根据断点前缀和响应式配置生成对应的 Tailwind 类名。
+ */
 export function getResponsiveClass(prefix: string, value?: number | ColResponsive): string {
   if (value === undefined) return ''
   if (typeof value === 'number') {
@@ -27,6 +35,3 @@ export function getResponsiveClass(prefix: string, value?: number | ColResponsiv
   }
   return classes.join(' ')
 }
-
-export const ALIGN_MAP = { top: 'items-start', middle: 'items-center', bottom: 'items-end' } as const
-export const JUSTIFY_MAP = { start: 'justify-start', end: 'justify-end', center: 'justify-center', 'space-around': 'justify-around', 'space-between': 'justify-between' } as const

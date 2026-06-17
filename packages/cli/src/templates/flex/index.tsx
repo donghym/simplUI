@@ -1,34 +1,9 @@
 import { forwardRef } from 'react'
 import { cn } from '../lib/utils'
-import type { FlexProps, FlexJustify, FlexAlign, FlexWrap } from './types'
+import { flexVariants } from './flex-variants'
+import type { FlexProps } from './types'
 
-export type { FlexProps, FlexJustify, FlexAlign, FlexWrap }
-
-/** justify 映射到 Tailwind 类名 */
-const justifyMap: Record<FlexJustify, string> = {
-  'flex-start': 'justify-start',
-  'center': 'justify-center',
-  'flex-end': 'justify-end',
-  'space-between': 'justify-between',
-  'space-around': 'justify-around',
-  'space-evenly': 'justify-evenly',
-}
-
-/** align 映射到 Tailwind 类名 */
-const alignMap: Record<FlexAlign, string> = {
-  'flex-start': 'items-start',
-  'center': 'items-center',
-  'flex-end': 'items-end',
-  'stretch': 'items-stretch',
-  'baseline': 'items-baseline',
-}
-
-/** wrap 映射到 Tailwind 类名 */
-const wrapMap: Record<FlexWrap, string> = {
-  'wrap': 'flex-wrap',
-  'nowrap': 'flex-nowrap',
-  'wrap-reverse': 'flex-wrap-reverse',
-}
+export type { FlexProps, FlexJustify, FlexAlign, FlexWrap } from './types'
 
 /**
  * Flex 弹性布局组件
@@ -62,16 +37,19 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>(
     },
     ref,
   ) => {
+    // gap 为数字时转换为 px，字符串直接使用
+    const gapClass = gap !== undefined
+      ? typeof gap === 'number'
+        ? `gap-[${gap}px]`
+        : gap
+      : ''
+
     return (
       <div
         ref={ref}
         className={cn(
-          'flex',
-          vertical ? 'flex-col' : 'flex-row',
-          justifyMap[justify],
-          alignMap[align],
-          wrapMap[wrap],
-          gap,
+          flexVariants({ vertical, justify, align, wrap }),
+          gapClass,
           className,
         )}
         {...rest}

@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import { cn } from '../lib/utils'
 import type { IconProps, CustomIconProps, IconFontOptions } from './types'
 
 export type { IconProps, CustomIconProps, IconFontOptions } from './types'
@@ -21,13 +22,15 @@ export function getTwoToneColor(): string {
 
 export function Icon(props: CustomIconProps) {
   const { component: Component, className, rotate, spin, style, onClick, ...rest } = props
+  // rotate 和 spin 通过 style 实现，动态值无法用 Tailwind className 表示
   const mergedStyle = {
     ...(rotate ? { transform: `rotate(${rotate}deg)` } : {}),
+    ...(spin ? { animation: 'spin 1s linear infinite' } : {}),
     ...style,
   }
   return (
     <span
-      className={['sui-icon', spin ? 'sui-icon-spin' : '', className].filter(Boolean).join(' ') || undefined}
+      className={cn('sui-icon', className)}
       style={mergedStyle}
       onClick={onClick}
       {...rest}
@@ -59,13 +62,15 @@ export function createFromIconfontCN(options: IconFontOptions) {
 
   const Iconfont = forwardRef<HTMLSpanElement, IconProps & { type: string }>(
     ({ type, className, rotate, spin, style, onClick, ...rest }) => {
+      // rotate 和 spin 通过 style 实现，动态值无法用 Tailwind className 表示
       const mergedStyle = {
         ...(rotate ? { transform: `rotate(${rotate}deg)` } : {}),
+        ...(spin ? { animation: 'spin 1s linear infinite' } : {}),
         ...style,
       }
       return (
         <span
-          className={['sui-icon', spin ? 'sui-icon-spin' : '', className].filter(Boolean).join(' ') || undefined}
+          className={cn('sui-icon', className)}
           style={mergedStyle}
           onClick={onClick}
           {...rest}
