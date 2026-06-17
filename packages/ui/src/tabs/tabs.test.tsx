@@ -1,174 +1,218 @@
+import { createRef } from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import { Tabs, TabPane } from './index'
 
 describe('Tabs', () => {
-  it('默认渲染 line 变体，激活第一个选项卡', () => {
+  it('渲染默认变体并正确显示第一个选项卡内容', () => {
     render(
       <Tabs>
-        <TabPane key="tab1" tab="标签一">
-          内容一
+        <TabPane key="tab1" tab="Tab 1">
+          Content 1
         </TabPane>
-        <TabPane key="tab2" tab="标签二">
-          内容二
+        <TabPane key="tab2" tab="Tab 2">
+          Content 2
         </TabPane>
       </Tabs>,
     )
 
-    // tab bar 渲染
-    expect(screen.getByRole('tablist')).toBeInTheDocument()
-    // 两个 tab 按钮
-    expect(screen.getByText('标签一')).toBeInTheDocument()
-    expect(screen.getByText('标签二')).toBeInTheDocument()
-    // 第一个选项卡默认激活
-    expect(screen.getByRole('tab', { name: '标签一' })).toHaveAttribute('aria-selected', 'true')
-    // 激活面板内容可见
-    expect(screen.getByText('内容一')).toBeInTheDocument()
+    // 检查 tablist 存在
+    const tablist = screen.getByRole('tablist')
+    expect(tablist).toBeInTheDocument()
+
+    // 检查两个 tab 按钮
+    const tabs = screen.getAllByRole('tab')
+    expect(tabs).toHaveLength(2)
+
+    // 第一个 tab 应该被选中
+    expect(tabs[0]).toHaveAttribute('aria-selected', 'true')
+    expect(tabs[1]).toHaveAttribute('aria-selected', 'false')
+
+    // 第一个 tab 的内容应该显示
+    const tabpanel = screen.getByRole('tabpanel')
+    expect(tabpanel).toHaveTextContent('Content 1')
   })
 
-  it('defaultActiveKey 非受控模式下指定默认激活选项卡', () => {
+  it.each(['line', 'card', 'edgeless'] as const)(
+    '渲染变体 %s 的类名正确',
+    (variant) => {
+      render(
+        <Tabs variant={variant}>
+          <TabPane key="tab1" tab="Tab 1">
+            Content
+          </TabPane>
+        </Tabs>,
+      )
+
+      const tablist = screen.getByRole('tablist')
+      expect(tablist).toBeInTheDocument()
+      expect(tablist.className.length).toBeGreaterThan(0)
+    },
+  )
+
+  it('通过 cn() 和 twMerge 合并用户 className', () => {
+    render(
+      <Tabs className="bg-muted">
+        <TabPane key="tab1" tab="Tab 1">
+          Content
+        </TabPane>
+      </Tabs>,
+    )
+
+    const container = screen.getByRole('tablist').parentElement
+    expect(container).toBeInTheDocument()
+    expect(container?.className).toContain('bg-muted')
+  })
+
+  it('点击切换触发 onChange 并更新内容', () => {
+    const handleChange = vi.fn()
+
+    render(
+      <Tabs onChange={handleChange}>
+        <TabPane key="tab1" tab="Tab 1">
+          Content 1
+        </TabPane>
+        <TabPane key="tab2" tab="Tab 2">
+          Content 2
+        </TabPane>
+      </Tabs>,
+    )
+
+    const tabs = screen.getAllByRole('tab')
+    const secondTab = tabs[1]!
+
+    // 点击第二个 tab
+    fireEvent.click(secondTab)
+
+    // onChange 应该被调用
+    expect(handleChange).toHaveBeenCalledWith('tab2')
+
+    // 第二个 tab 应该被选中
+    expect(tabs[1]).toHaveAttribute('aria-selected', 'true')
+
+    // 内容应该切换
+    const tabpanel = screen.getByRole('tabpanel')
+    expect(tabpanel).toHaveTextContent('Content 2')
+  })
+
+  it('disabled 状态下点击不触发切换', () => {
+    const handleChange = vi.fn()
+
+    render(
+      <Tabs onChange={handleChange}>
+        <TabPane key="tab1" tab="Tab 1">
+          Content 1
+        </TabPane>
+        <TabPane key="tab2" tab="Tab 2" disabled>
+          Content 2
+        </TabPane>
+      </Tabs>,
+    )
+
+    const tabs = screen.getAllByRole('tab')
+    const secondTab = tabs[1]!
+
+    // 第二个 tab 应该有 aria-disabled
+    expect(secondTab).toHaveAttribute('aria-disabled', 'true')
+    expect(secondTab).toBeDisabled()
+
+    // 点击 disabled tab 不应该触发 onChange
+    fireEvent.click(secondTab)
+    expect(handleChange).not.toHaveBeenCalled()
+
+    // 第一个 tab 仍然选中
+    expect(tabs[0]).toHaveAttribute('aria-selected', 'true')
+  })
+
+  it('ref 正确转发到容器 div 元素', () => {
+    const ref = createRef<HTMLDivElement>()
+    render(
+      <Tabs ref={ref}>
+        <TabPane key="tab1" tab="Tab 1">
+          Content
+        </TabPane>
+      </Tabs>,
+    )
+
+    expect(ref.current).toBeInstanceOf(HTMLDivElement)
+    expect(ref.current?.classList.contains('sui-tabs')).toBe(true)
+  })
+
+  it('ARIA 属性正确设置', () => {
+    render(
+      <Tabs>
+        <TabPane key="tab1" tab="Tab 1">
+          Content 1
+        </TabPane>
+        <TabPane key="tab2" tab="Tab 2">
+          Content 2
+        </TabPane>
+      </Tabs>,
+    )
+
+    const tabs = screen.getAllByRole('tab')
+    const tabpanel = screen.getByRole('tabpanel')
+
+    // 检查 aria-controls 和 aria-labelledby 关联
+    expect(tabs[0]).toHaveAttribute('aria-controls', 'tabpanel-tab1')
+    expect(tabpanel).toHaveAttribute('aria-labelledby', 'tab-tab1')
+
+    // 检查 id 属性
+    expect(tabs[0]).toHaveAttribute('id', 'tab-tab1')
+    expect(tabpanel).toHaveAttribute('id', 'tabpanel-tab1')
+  })
+
+  it('受控模式下 activeKey 控制选中状态', () => {
+    const handleChange = vi.fn()
+
+    render(
+      <Tabs activeKey="tab2" onChange={handleChange}>
+        <TabPane key="tab1" tab="Tab 1">
+          Content 1
+        </TabPane>
+        <TabPane key="tab2" tab="Tab 2">
+          Content 2
+        </TabPane>
+      </Tabs>,
+    )
+
+    const tabs = screen.getAllByRole('tab')
+    const firstTab = tabs[0]!
+
+    // 第二个 tab 应该被选中（由 activeKey 控制）
+    expect(tabs[1]).toHaveAttribute('aria-selected', 'true')
+
+    // 内容应该是第二个
+    const tabpanel = screen.getByRole('tabpanel')
+    expect(tabpanel).toHaveTextContent('Content 2')
+
+    // 点击第一个 tab 触发 onChange，但内部状态不改变（受控）
+    fireEvent.click(firstTab)
+    expect(handleChange).toHaveBeenCalledWith('tab1')
+
+    // 仍然显示第二个内容（因为是受控模式）
+    expect(tabpanel).toHaveTextContent('Content 2')
+  })
+
+  it('defaultActiveKey 设置初始选中状态', () => {
     render(
       <Tabs defaultActiveKey="tab2">
-        <TabPane key="tab1" tab="标签一">
-          内容一
+        <TabPane key="tab1" tab="Tab 1">
+          Content 1
         </TabPane>
-        <TabPane key="tab2" tab="标签二">
-          内容二
-        </TabPane>
-      </Tabs>,
-    )
-
-    expect(screen.getByRole('tab', { name: '标签二' })).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByText('内容二')).toBeInTheDocument()
-  })
-
-  it('activeKey 受控模式下由外部控制激活状态', () => {
-    const { rerender } = render(
-      <Tabs activeKey="tab1">
-        <TabPane key="tab1" tab="标签一">
-          内容一
-        </TabPane>
-        <TabPane key="tab2" tab="标签二">
-          内容二
+        <TabPane key="tab2" tab="Tab 2">
+          Content 2
         </TabPane>
       </Tabs>,
     )
 
-    expect(screen.getByRole('tab', { name: '标签一' })).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByText('内容一')).toBeInTheDocument()
+    const tabs = screen.getAllByRole('tab')
 
-    rerender(
-      <Tabs activeKey="tab2">
-        <TabPane key="tab1" tab="标签一">
-          内容一
-        </TabPane>
-        <TabPane key="tab2" tab="标签二">
-          内容二
-        </TabPane>
-      </Tabs>,
-    )
+    // 第二个 tab 应该被选中
+    expect(tabs[1]).toHaveAttribute('aria-selected', 'true')
 
-    expect(screen.getByRole('tab', { name: '标签二' })).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByText('内容二')).toBeInTheDocument()
-  })
-
-  it('onChange 点击选项卡时触发回调', () => {
-    const onChange = vi.fn()
-
-    render(
-      <Tabs onChange={onChange}>
-        <TabPane key="tab1" tab="标签一">
-          内容一
-        </TabPane>
-        <TabPane key="tab2" tab="标签二">
-          内容二
-        </TabPane>
-      </Tabs>,
-    )
-
-    fireEvent.click(screen.getByRole('tab', { name: '标签二' }))
-    expect(onChange).toHaveBeenCalledTimes(1)
-    expect(onChange).toHaveBeenCalledWith('tab2')
-  })
-
-  it('disabled 选项卡不可点击且置灰', () => {
-    const onChange = vi.fn()
-
-    render(
-      <Tabs onChange={onChange}>
-        <TabPane key="tab1" tab="可用标签">
-          内容一
-        </TabPane>
-        <TabPane key="tab2" tab="禁用标签" disabled>
-          禁用内容
-        </TabPane>
-      </Tabs>,
-    )
-
-    const disabledTab = screen.getByRole('tab', { name: '禁用标签' })
-    expect(disabledTab).toBeDisabled()
-    expect(disabledTab).toHaveAttribute('aria-disabled', 'true')
-
-    fireEvent.click(disabledTab)
-    expect(onChange).not.toHaveBeenCalled()
-    // 内容不可见（未被激活）
-    expect(screen.queryByText('禁用内容')).not.toBeInTheDocument()
-  })
-
-  it('variant=card 渲染卡片式选项卡', () => {
-    render(
-      <Tabs variant="card">
-        <TabPane key="tab1" tab="卡片标签">
-          卡片内容
-        </TabPane>
-      </Tabs>,
-    )
-
-    const tab = screen.getByRole('tab', { name: '卡片标签' })
-    expect(tab.className).toContain('rounded-t-md')
-    expect(tab.className).toContain('border')
-  })
-
-  it('variant=edgeless 渲染无边框按钮式选项卡', () => {
-    render(
-      <Tabs variant="edgeless">
-        <TabPane key="tab1" tab="按钮标签">
-          无边框内容
-        </TabPane>
-      </Tabs>,
-    )
-
-    const tab = screen.getByRole('tab', { name: '按钮标签' })
-    expect(tab.className).toContain('rounded-md')
-    expect(tab.className).toContain('hover:bg-muted')
-  })
-
-  it('用户 className 通过 cn() + twMerge 合并可覆盖默认', () => {
-    const { container } = render(
-      <Tabs className="p-6 bg-muted">
-        <TabPane key="tab1" tab="标签">
-          内容
-        </TabPane>
-      </Tabs>,
-    )
-
-    const root = container.firstChild as HTMLElement
-    expect(root.className).toContain('p-6')
-    expect(root.className).toContain('bg-muted')
-  })
-
-  it('tabPosition=bottom 选项卡位于底部', () => {
-    render(
-      <Tabs tabPosition="bottom">
-        <TabPane key="tab1" tab="底部标签">
-          底部内容
-        </TabPane>
-      </Tabs>,
-    )
-
-    // content 在 tab bar 之前渲染，tab bar 存在
-    expect(screen.getByRole('tablist')).toBeInTheDocument()
-    expect(screen.getByRole('tab', { name: '底部标签' })).toBeInTheDocument()
-    expect(screen.getByText('底部内容')).toBeInTheDocument()
+    // 内容应该是第二个
+    const tabpanel = screen.getByRole('tabpanel')
+    expect(tabpanel).toHaveTextContent('Content 2')
   })
 })

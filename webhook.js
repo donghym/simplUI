@@ -183,9 +183,10 @@ async function deploy() {
     // 1. 检查项目目录
     if (!fs.existsSync(CONFIG.projectDir)) {
       log('项目目录不存在，执行 git clone...', 'WARN');
-      const cloneResult = await execCommand(
+      const parentDir = path.dirname(CONFIG.projectDir);
+      await execCommand(
         `git clone ${CONFIG.gitRepo} ${CONFIG.projectDir}`,
-        { cwd: path.dirname(CONFIG.projectDir) }
+        { cwd: parentDir }
       );
       log('Git clone 完成');
     }
@@ -193,14 +194,7 @@ async function deploy() {
     // 2. 进入项目目录
     process.chdir(CONFIG.projectDir);
 
-    // 3. 拉取最新代码
-    log('拉取最新代码...');
-    await execCommand('git fetch origin');
-    await execCommand(`git reset --hard origin/${CONFIG.branch}`);
-    await execCommand('git clean -fd');
-    log('代码拉取完成');
-
-    // 4. 执行 deploy.sh
+    // 3. 直接执行 deploy.sh（deploy.sh 内部会处理 git 操作和构建）
     const deployResult = await runDeployScript();
     log('deploy.sh 执行成功');
 
@@ -272,18 +266,6 @@ const server = http.createServer(async (req, res) => {
 
         // 解析 payload
         const payload = JSON.parse(body);
-        log(`收到 Webhook 请求: ${payload.ref || 'unknown'}`);
-
-        // 检查是否是测试事件（Gitea 测试推送的 commit ID 为 0000000...）
-        const isTestEvent = payload.after === '0000000000000000000000000000000000000000' ||
-                           (payload.head_commit && payload.head_commit.id === '0000000000000000000000000000000000000000');
-        if (isTestEvent) {
-          log('检测到 Gitea 测试事件，跳过部署', 'INFO');
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ message: 'Test event, skipped' }));
-          return;
-        }
-
         // 检查分支
         if (payload.ref && payload.ref !== `refs/heads/${CONFIG.branch}`) {
           log(`分支不匹配: ${payload.ref}，跳过部署`, 'INFO');
