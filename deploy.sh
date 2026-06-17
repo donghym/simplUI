@@ -114,25 +114,45 @@ HTMLEOF
     
     # 使用 Python 插入新内容（更可靠）
     if command -v python3 &> /dev/null; then
-        python3 << PYEOF
-import re
+        # 将 commit HTML 写入临时文件
+        echo "${COMMIT_HTML}" > /tmp/commit_html.tmp
+        
+        python3 << 'PYEOF'
+import os
 
-html_content = """${COMMIT_HTML}"""
+log_page = "/var/www/UI/simplUI/deploy/index.html"
 
-with open("${LOG_PAGE}", "r", encoding="utf-8") as f:
+# 读取 commit HTML
+with open("/tmp/commit_html.tmp", "r", encoding="utf-8") as f:
+    html_content = f.read().strip()
+
+# 读取原文件
+with open(log_page, "r", encoding="utf-8") as f:
     content = f.read()
 
 # 在 commitList div 中插入新内容
-content = content.replace(
-    '<div id="commitList">\n        </div>',
-    '<div id="commitList">\n' + html_content + '\n        </div>'
-)
+old_div = '<div id="commitList">\n        </div>'
+new_div = '<div id="commitList">\n' + html_content + '\n        </div>'
 
-with open("${LOG_PAGE}", "w", encoding="utf-8") as f:
+if old_div in content:
+    content = content.replace(old_div, new_div)
+    print("找到插入点，更新成功")
+else:
+    # 尝试其他格式
+    old_div2 = '<div id="commitList">\n</div>'
+    if old_div2 in content:
+        content = content.replace(old_div2, new_div)
+        print("找到插入点(格式2)，更新成功")
+    else:
+        print("警告：未找到插入点")
+
+with open(log_page, "w", encoding="utf-8") as f:
     f.write(content)
 
-print("HTML 更新成功")
+print("HTML 更新完成")
 PYEOF
+        
+        rm -f /tmp/commit_html.tmp
     else
         # 备用方案：使用 sed
         log_info "使用 sed 插入内容..."
