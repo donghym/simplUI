@@ -22,18 +22,27 @@ log_error() {
 mkdir -p "${LOG_DIR}"
 cd "${PROJECT_DIR}" || exit 1
 
-# 获取更新前的版本号
-PREV_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "empty")
-log_info "部署前版本: ${PREV_COMMIT:0:8}"
-
 # 拉取最新代码
 log_info "正在拉取最新代码..."
 git fetch --all
+
+# 获取远程最新版本号（更新前）
+PREV_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "empty")
+log_info "当前版本: ${PREV_COMMIT:0:8}"
+
+# 获取远程目标版本号
+NEW_COMMIT=$(git rev-parse origin/main 2>/dev/null || echo "empty")
+log_info "远程最新版本: ${NEW_COMMIT:0:8}"
+
+# 检查是否有更新
+if [ "${PREV_COMMIT}" = "${NEW_COMMIT}" ]; then
+    log_info "本地已是最新版本，无需更新"
+    exit 0
+fi
+
+# 更新代码
 git reset --hard origin/main  # 如果是 master 分支请改为 master
 git clean -fd
-
-# 获取更新后的版本号
-NEW_COMMIT=$(git rev-parse HEAD)
 DEPLOY_TIME=$(date '+%Y-%m-%d %H:%M:%S')
 log_info "部署后版本: ${NEW_COMMIT:0:8}"
 
@@ -168,8 +177,6 @@ PYEOF
     fi
     
     log_info "HTML 记录已生成: ${LOG_PAGE}"
-else
-    log_info "没有新的提交，跳过 HTML 生成"
 fi
 
 log_info "部署完成!"
