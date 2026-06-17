@@ -10,7 +10,11 @@ NGINX_ROOT="/var/www/UI/simplUI/storybook-static"
 
 # 日志输出函数
 log_info() {
-    echo "[INFO] $1"
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [INFO] $1"
+}
+
+log_error() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] [ERROR] $1" >&2
 }
 
 # =============== 初始化与代码更新 ===============
@@ -51,17 +55,22 @@ log_info "构建文档..."
 npm run storybook:build
 
 log_info "部署静态文件到 Nginx 目录..."
-# rm -rf "${NGINX_ROOT:?}"/*
+
 # =============== 生成部署历史记录 ===============
+log_info "生成部署历史记录..."
+log_info "PREV_COMMIT: ${PREV_COMMIT:0:8}"
+log_info "NEW_COMMIT: ${NEW_COMMIT:0:8}"
+
 if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
-    log_info "生成部署历史记录..."
+    log_info "检测到新提交，生成 HTML 记录..."
     
     # 确保日志目录存在
     mkdir -p "${LOG_DIR}"
     
     # 如果是首次部署,创建 HTML 骨架
     if [ ! -f "${LOG_PAGE}" ]; then
-        cat > "${LOG_PAGE}" <<HTML
+        log_info "创建首次部署的 HTML 页面..."
+        cat > "${LOG_PAGE}" << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -69,12 +78,13 @@ if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>代码部署更新记录</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box} 
+        *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:system-ui,sans-serif;background:#f5f6f8;padding:20px}
         .wrap{max-width:950px;margin:0 auto;background:#fff;border-radius:10px;padding:25px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
         h1{font-size:20px;color:#222;margin-bottom:20px;border-bottom:1px solid #eee;padding-bottom:10px}
         .commit-item{padding:15px;border-left:4px solid #2563eb;margin-bottom:12px;background:#f8fafc;border-radius:6px}
         .commit-hash{font-family:monospace;color:#2563eb;font-weight:bold;font-size:14px}
+        .deploy-time{font-size:13px;color:#16a34a;margin:4px 0;font-weight:bold}
         .commit-time{font-size:13px;color:#666;margin:4px 0}
         .commit-author{font-size:13px;color:#555}
         .commit-msg{margin:6px 0;color:#333}
@@ -86,28 +96,61 @@ if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
     <div class="wrap">
         <h1>项目部署与提交历史</h1>
         <div id="commitList">
-HTML
+        </div>
+    </div>
+</body>
+</html>
+HTMLEOF
     fi
     
-    # 生成本次提交的详细信息区块（按时间倒序，最新的在最前面）
-    TEMP_CONTENT=$(git log --pretty=format:" \
-        <div class='commit-item'> \
-            <div class='commit-hash'>%h</div> \
-            <div class='commit-time'>提交时间：%ad</div> \
-            <div class='commit-author'>提交人：%an</div> \
-            <div class='commit-msg'>提交说明：%s</div> \
-            <div class='file-list'>变更文件：$(git diff --name-only ${PREV_COMMIT} ${NEW_COMMIT} | tr '\n' ' ')</div> \
-        </div>" \
-        --date=format:"%Y-%m-%d %H:%M:%S" \
-        "${PREV_COMMIT}..${NEW_COMMIT}")
+    # 获取变更文件列表
+    CHANGED_FILES=$(git diff --name-only "${PREV_COMMIT}" "${NEW_COMMIT}" 2>/dev/null | tr '\n' ' ' || echo "无")
+    log_info "变更文件: ${CHANGED_FILES:0:100}..."
+    
+    # 生成本次提交的详细信息
+    COMMIT_HTML=$(git log --pretty=format:"<div class='commit-item'><div class='commit-hash'>%h</div><div class='deploy-time'>部署时间：${DEPLOY_TIME}</div><div class='commit-time'>提交时间：%ad</div><div class='commit-author'>提交人：%an</div><div class='commit-msg'>提交说明：%s</div><div class='file-list'>变更文件：${CHANGED_FILES}</div></div>" --date=format:"%Y-%m-%d %H:%M:%S" "${PREV_COMMIT}..${NEW_COMMIT}")
+    
+    log_info "生成的 HTML 长度: ${#COMMIT_HTML}"
+    
+    # 使用 Python 插入新内容（更可靠）
+    if command -v python3 &> /dev/null; then
+        python3 << PYEOF
+import re
 
-    # 将新内容插入到 commitList 的开头（最新的在最上面）
-    sed -i -e '/<\/div><\/body><\/html>/d' "${LOG_PAGE}"
-    sed -i -e '/<div id="commitList">/r /dev/stdin' "${LOG_PAGE}" <<< "${TEMP_CONTENT}"
-    echo "</div></body></html>" >> "${LOG_PAGE}"
+html_content = """${COMMIT_HTML}"""
+
+with open("${LOG_PAGE}", "r", encoding="utf-8") as f:
+    content = f.read()
+
+# 在 commitList div 中插入新内容
+content = content.replace(
+    '<div id="commitList">\n        </div>',
+    '<div id="commitList">\n' + html_content + '\n        </div>'
+)
+
+with open("${LOG_PAGE}", "w", encoding="utf-8") as f:
+    f.write(content)
+
+print("HTML 更新成功")
+PYEOF
+    else
+        # 备用方案：使用 sed
+        log_info "使用 sed 插入内容..."
+        # 删除旧的结束标签
+        sed -i 's|</div>\s*</body>\s*</html>||' "${LOG_PAGE}"
+        # 插入新内容
+        echo "${COMMIT_HTML}" >> "${LOG_PAGE}"
+        # 添加结束标签
+        echo "        </div>" >> "${LOG_PAGE}"
+        echo "    </div>" >> "${LOG_PAGE}"
+        echo "</body>" >> "${LOG_PAGE}"
+        echo "</html>" >> "${LOG_PAGE}"
+    fi
+    
+    log_info "HTML 记录已生成: ${LOG_PAGE}"
+else
+    log_info "没有新的提交，跳过 HTML 生成"
 fi
 
 log_info "部署完成!"
-
-
-echo "更新记录页面已生成,请访问: https://donghy.top/simplUI/deploy/index.html"
+echo "更新记录页面: https://donghy.top/simplUI/log"
