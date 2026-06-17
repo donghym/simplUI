@@ -31,6 +31,8 @@ export default [
       'pnpm-lock.yaml',
       'packages/cli/bin/**',
       'packages/cli/src/templates/**',
+      'storybook-static/**',
+      'storybook-demo/**',
     ],
   },
 ]

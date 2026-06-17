@@ -4,6 +4,7 @@
   "files": [
     "index.tsx",
     "chat-bubble-variants.ts",
+    "chat-bubble-markdown.tsx",
     "types.ts"
   ],
   "dependencies": [

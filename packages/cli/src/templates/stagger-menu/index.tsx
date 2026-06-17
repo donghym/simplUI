@@ -29,7 +29,7 @@ export const StaggerMenu = forwardRef<HTMLDivElement, StaggerMenuProps>((props, 
           className={cn(
             staggerMenuItemVariants({ disabled: item.disabled, open, direction }),
           )}
-          style={{ transitionDelay: open ? `${index * staggerDelay}ms` : '0ms' } /* 动态交错延迟，允许保留 */}
+          style={{ transitionDelay: open ? `${index * staggerDelay}ms` : '0ms' } /* 动态交错延迟计算，运行时设置，允许保留 */}
           onClick={() => {
             if (!item.disabled) item.onClick?.()
           }}

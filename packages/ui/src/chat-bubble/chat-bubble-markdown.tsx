@@ -74,23 +74,23 @@ function tokenizeLine(line: string): React.ReactNode[] {
     const text = match[0]
     if (match[1]) {
       tokens.push(
-        <span key={key++} className="text-purple-600 dark:text-purple-400 font-semibold">{text}</span>,
+        <span key={key++} className="text-gray-700 dark:text-gray-300 font-semibold">{text}</span>,
       )
     } else if (match[2] || match[3] || match[4]?.startsWith('`')) {
       tokens.push(
-        <span key={key++} className="text-green-700 dark:text-green-400">{text}</span>,
+        <span key={key++} className="text-success dark:text-success">{text}</span>,
       )
     } else if (text.startsWith('//') || text.startsWith('/*')) {
       tokens.push(
-        <span key={key++} className="text-gray-500 dark:text-gray-400 italic">{text}</span>,
+        <span key={key++} className="text-muted-foreground italic">{text}</span>,
       )
     } else if (/^\d/.test(text)) {
       tokens.push(
-        <span key={key++} className="text-orange-600 dark:text-orange-400">{text}</span>,
+        <span key={key++} className="text-warning dark:text-warning">{text}</span>,
       )
     } else {
       tokens.push(
-        <span key={key++} className="text-yellow-700 dark:text-yellow-400">{text}</span>,
+        <span key={key++} className="text-gray-600 dark:text-gray-400">{text}</span>,
       )
     }
     lastIndex = match.index + text.length

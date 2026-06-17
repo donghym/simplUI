@@ -2,8 +2,14 @@ import type { InputHTMLAttributes, ReactNode } from 'react'
 import type { VariantProps } from 'class-variance-authority'
 import { inputVariants } from './input-variants'
 
+/** 输入框状态类型，error 时边框 danger 色 + aria-invalid，warning 时边框 warning 色 */
 export type InputStatus = 'error' | 'warning'
 
+/**
+ * Input 组件 Props
+ *
+ * 支持受控和非受控两种模式，支持前缀/后缀、清空按钮、字数统计等功能。
+ */
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'suffix'>,
   VariantProps<typeof inputVariants> {
