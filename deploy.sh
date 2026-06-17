@@ -2,11 +2,11 @@
 set -euo pipefail
 
 # ================= 基础配置 =================
-PROJECT_DIR="/var/www/UI2/simplUI"
-LOG_DIR="/var/www/UI2/simplUI/deploy"
+PROJECT_DIR="/var/www/UI/simplUI"
+LOG_DIR="/var/www/UI/simplUI/deploy"
 LOG_PAGE="${LOG_DIR}/index.html"
 LOG_FILE="${LOG_DIR}/deploy-$(date +%Y%m%d).log"
-NGINX_ROOT="/var/www/UI2/simplUI/storybook-static"
+NGINX_ROOT="/var/www/UI/simplUI/storybook-static"
 
 # 日志输出函数
 log_info() {
