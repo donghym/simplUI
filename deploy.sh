@@ -17,34 +17,17 @@ log_error() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] [ERROR] $1" >&2
 }
 
-# =============== 初始化与代码更新 ===============
-# 创建日志目录并进入项目目录
+# =============== 初始化 ===============
 mkdir -p "${LOG_DIR}"
 cd "${PROJECT_DIR}" || exit 1
 
-# 拉取最新代码
+# =============== 拉取最新代码 ===============
 log_info "正在拉取最新代码..."
 git fetch --all
-
-# 获取远程最新版本号（更新前）
-PREV_COMMIT=$(git rev-parse HEAD 2>/dev/null || echo "empty")
-log_info "当前版本: ${PREV_COMMIT:0:8}"
-
-# 获取远程目标版本号
-NEW_COMMIT=$(git rev-parse origin/main 2>/dev/null || echo "empty")
-log_info "远程最新版本: ${NEW_COMMIT:0:8}"
-
-# 检查是否有更新
-if [ "${PREV_COMMIT}" = "${NEW_COMMIT}" ]; then
-    log_info "本地已是最新版本，无需更新"
-    exit 0
-fi
-
-# 更新代码
-git reset --hard origin/main  # 如果是 master 分支请改为 master
+git reset --hard origin/main
 git clean -fd
 DEPLOY_TIME=$(date '+%Y-%m-%d %H:%M:%S')
-log_info "部署后版本: ${NEW_COMMIT:0:8}"
+log_info "代码已更新到最新版本"
 
 # =============== 安装依赖与构建 ===============
 log_info "安装依赖..."
@@ -67,19 +50,9 @@ log_info "部署静态文件到 Nginx 目录..."
 
 # =============== 生成部署历史记录 ===============
 log_info "生成部署历史记录..."
-log_info "PREV_COMMIT: ${PREV_COMMIT:0:8}"
-log_info "NEW_COMMIT: ${NEW_COMMIT:0:8}"
 
-if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
-    log_info "检测到新提交，生成 HTML 记录..."
-    
-    # 确保日志目录存在
-    mkdir -p "${LOG_DIR}"
-    
-    # 如果是首次部署,创建 HTML 骨架
-    if [ ! -f "${LOG_PAGE}" ]; then
-        log_info "创建首次部署的 HTML 页面..."
-        cat > "${LOG_PAGE}" << 'HTMLEOF'
+# 创建 HTML 页面
+cat > "${LOG_PAGE}" << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -105,79 +78,19 @@ if [ "${PREV_COMMIT}" != "${NEW_COMMIT}" ]; then
     <div class="wrap">
         <h1>项目部署与提交历史</h1>
         <div id="commitList">
+HTMLEOF
+
+# 获取最近10条提交记录
+git log -10 --pretty=format:"<div class='commit-item'><div class='commit-hash'>%h</div><div class='deploy-time'>部署时间：${DEPLOY_TIME}</div><div class='commit-time'>提交时间：%ad</div><div class='commit-author'>提交人：%an</div><div class='commit-msg'>提交说明：%s</div></div>" --date=format:"%Y-%m-%d %H:%M:%S" >> "${LOG_PAGE}"
+
+# 关闭 HTML 标签
+cat >> "${LOG_PAGE}" << 'HTMLEOF'
         </div>
     </div>
 </body>
 </html>
 HTMLEOF
-    fi
-    
-    # 获取变更文件列表
-    CHANGED_FILES=$(git diff --name-only "${PREV_COMMIT}" "${NEW_COMMIT}" 2>/dev/null | tr '\n' ' ' || echo "无")
-    log_info "变更文件: ${CHANGED_FILES:0:100}..."
-    
-    # 生成本次提交的详细信息
-    COMMIT_HTML=$(git log --pretty=format:"<div class='commit-item'><div class='commit-hash'>%h</div><div class='deploy-time'>部署时间：${DEPLOY_TIME}</div><div class='commit-time'>提交时间：%ad</div><div class='commit-author'>提交人：%an</div><div class='commit-msg'>提交说明：%s</div><div class='file-list'>变更文件：${CHANGED_FILES}</div></div>" --date=format:"%Y-%m-%d %H:%M:%S" "${PREV_COMMIT}..${NEW_COMMIT}")
-    
-    log_info "生成的 HTML 长度: ${#COMMIT_HTML}"
-    
-    # 使用 Python 插入新内容（更可靠）
-    if command -v python3 &> /dev/null; then
-        # 将 commit HTML 写入临时文件
-        echo "${COMMIT_HTML}" > /tmp/commit_html.tmp
-        
-        python3 << 'PYEOF'
-import os
 
-log_page = "/var/www/UI/simplUI/deploy/index.html"
-
-# 读取 commit HTML
-with open("/tmp/commit_html.tmp", "r", encoding="utf-8") as f:
-    html_content = f.read().strip()
-
-# 读取原文件
-with open(log_page, "r", encoding="utf-8") as f:
-    content = f.read()
-
-# 在 commitList div 中插入新内容
-old_div = '<div id="commitList">\n        </div>'
-new_div = '<div id="commitList">\n' + html_content + '\n        </div>'
-
-if old_div in content:
-    content = content.replace(old_div, new_div)
-    print("找到插入点，更新成功")
-else:
-    # 尝试其他格式
-    old_div2 = '<div id="commitList">\n</div>'
-    if old_div2 in content:
-        content = content.replace(old_div2, new_div)
-        print("找到插入点(格式2)，更新成功")
-    else:
-        print("警告：未找到插入点")
-
-with open(log_page, "w", encoding="utf-8") as f:
-    f.write(content)
-
-print("HTML 更新完成")
-PYEOF
-        
-        rm -f /tmp/commit_html.tmp
-    else
-        # 备用方案：使用 sed
-        log_info "使用 sed 插入内容..."
-        # 删除旧的结束标签
-        sed -i 's|</div>\s*</body>\s*</html>||' "${LOG_PAGE}"
-        # 插入新内容
-        echo "${COMMIT_HTML}" >> "${LOG_PAGE}"
-        # 添加结束标签
-        echo "        </div>" >> "${LOG_PAGE}"
-        echo "    </div>" >> "${LOG_PAGE}"
-        echo "</body>" >> "${LOG_PAGE}"
-        echo "</html>" >> "${LOG_PAGE}"
-    fi
-    
-    log_info "HTML 记录已生成: ${LOG_PAGE}"
-fi
-
+log_info "HTML 记录已生成: ${LOG_PAGE}"
 log_info "部署完成!"
 echo "更新记录页面: https://donghy.top/simplUI/log"
