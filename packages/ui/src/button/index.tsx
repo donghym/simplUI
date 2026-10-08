@@ -1,5 +1,5 @@
 import { forwardRef, type ReactNode } from 'react'
-import { Slot } from '@radix-ui/react-slot'
+import { Slot, Slottable } from '@radix-ui/react-slot'
 import { Loader2 } from 'lucide-react'
 import { cn } from '../lib/utils'
 import { buttonVariants } from './button-variants'
@@ -59,7 +59,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
   const renderContent = (): ReactNode => (
     <>
       {iconPosition === 'left' && renderIcon()}
-      {children}
+      <Slottable>{children}</Slottable>
       {iconPosition === 'right' && renderIcon()}
     </>
   )
@@ -67,7 +67,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
   if (asChild) {
     return (
       <Slot ref={ref as React.Ref<HTMLElement>} {...sharedProps} {...(rest as Record<string, unknown>)}>
-        {children}
+        {renderContent()}
       </Slot>
     )
   }

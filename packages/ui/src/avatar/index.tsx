@@ -48,10 +48,6 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>((props, ref) => {
     setHasError(true)
   }
 
-  // 当 src 变化时重置错误状态，支持重试场景
-  // 使用 key 来触发 React 重新挂载 img 元素
-  // 注意：此逻辑通过 useEffect + key 在渲染层实现
-
   /**
    * 渲染回退内容
    *

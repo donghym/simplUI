@@ -1,0 +1,9 @@
+{
+  "name": "auto-complete",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "AutoComplete input with suggestion dropdown"
+}

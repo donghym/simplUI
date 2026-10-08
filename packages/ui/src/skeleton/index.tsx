@@ -57,7 +57,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
       ...rest
     } = props
 
-    // loading 为 false 时直接渲染 children
+    // loading 为 false 且传入 children 时直接渲染 children
     if (!loading && children) {
       return <>{children}</>
     }

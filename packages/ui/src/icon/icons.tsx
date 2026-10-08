@@ -2,7 +2,7 @@ import { forwardRef } from 'react'
 import { IconBase } from './icon-base'
 import type { IconProps } from './types'
 
-// ─── Directional ───
+// ─── 方向性图标 ───
 export const ArrowUp = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
     <path d="M12 4l-8 8h5v8h6v-8h5z" />
@@ -164,7 +164,7 @@ export const ArrowsAlt = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 ArrowsAlt.displayName = 'ArrowsAlt'
 
-// ─── Suggestion ───
+// ─── 建议性图标 ───
 export const Question = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
@@ -312,7 +312,7 @@ export const Stop = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 Stop.displayName = 'Stop'
 
-// ─── Editor ───
+// ─── 编辑类图标 ───
 export const Edit = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
     <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
@@ -481,7 +481,7 @@ export const ZoomOut = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 ZoomOut.displayName = 'ZoomOut'
 
-// ─── Data ───
+// ─── 数据类图标 ───
 export const AreaChart = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
     <path d="M3 16v2h18v-2H3zm16-7.5l-3 3.5-4-5L7 13l-4-4v8h16V8.5z" />
@@ -587,7 +587,7 @@ export const Function = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 Function.displayName = 'Function'
 
-// ─── Brand & Logo ───
+// ─── 品牌和标识 ───
 export const Android = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
     <path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z" />
@@ -637,7 +637,7 @@ export const Html5 = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 Html5.displayName = 'Html5'
 
-// ─── Application ───
+// ─── 应用类图标 ───
 export const Mail = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
@@ -764,7 +764,7 @@ export const Unlock = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 Unlock.displayName = 'Unlock'
 
-// ─── Directional (continued) ───
+// ─── 方向性图标（续）───
 
 export const Logout = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
@@ -850,7 +850,7 @@ export const VerticalAlignBottom = forwardRef<SVGSVGElement, IconProps>((props, 
 ))
 VerticalAlignBottom.displayName = 'VerticalAlignBottom'
 
-// ─── Suggestion (continued) ───
+// ─── 建议性图标（续）───
 
 export const Star = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
@@ -908,7 +908,7 @@ export const Fire = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 Fire.displayName = 'Fire'
 
-// ─── Editor (continued) ───
+// ─── 编辑类图标（续）───
 
 export const Undo = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
@@ -959,7 +959,7 @@ export const Eraser = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 Eraser.displayName = 'Eraser'
 
-// ─── Data (continued) ───
+// ─── 数据类图标（续）───
 
 export const Database = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>
@@ -975,7 +975,7 @@ export const Api = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
 ))
 Api.displayName = 'Api'
 
-// ─── Application (continued) ───
+// ─── 应用类图标（续）───
 
 export const Bell = forwardRef<SVGSVGElement, IconProps>((props, ref) => (
   <IconBase ref={ref} {...props}>

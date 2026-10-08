@@ -1,0 +1,10 @@
+{
+  "name": "table",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react",
+    "react-virtuoso"
+  ],
+  "description": "Table component with sorting, selection, and pagination support"
+}

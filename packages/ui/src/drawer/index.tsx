@@ -83,7 +83,7 @@ const Drawer = forwardRef<HTMLDivElement, DrawerProps>(({
       {/* 遮罩层 */}
       <div className={overlayVariants({ visible: open })} onClick={handleMaskClick} />
 
-      {/* 抽屉面板 — 阻止点击冒泡到遮罩 */}
+      {/* 抽屉面板 — 阻止点击事件冒泡 */}
       <div
         ref={ref}
         role="dialog"

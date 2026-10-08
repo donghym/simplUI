@@ -20,7 +20,7 @@ export interface TransferProps {
   showSearch?: boolean
   /** 搜索框占位符 */
   searchPlaceholder?: string
-  /** 左侧标题 */
+  /** 左右两侧标题 */
   titles?: [ReactNode, ReactNode]
   /** 自定义样式 */
   style?: CSSProperties

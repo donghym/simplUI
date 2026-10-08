@@ -1,0 +1,9 @@
+{
+  "name": "result",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Result page for success/error/info/warning states"
+}

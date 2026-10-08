@@ -23,7 +23,7 @@ export interface DropdownProps extends VariantProps<typeof dropdownVariants> {
   placement?: DropdownPlacement
   /** 是否可见（受控模式），传入时接管 open 状态 */
   open?: boolean
-  /** 可见性变化回调（受控模式），在弹出/关闭时触发 */
+  /** 可见性变化回调，在弹出/关闭时触发（受控与非受控模式均会触发） */
   onOpenChange?: (open: boolean) => void
   /** 默认是否可见（非受控模式），默认 false */
   defaultOpen?: boolean

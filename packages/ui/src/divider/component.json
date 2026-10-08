@@ -1,0 +1,8 @@
+{
+  "name": "divider",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Divider line for separating content sections"
+}

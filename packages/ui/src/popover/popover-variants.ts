@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority'
  * Popover 变体配置
  *
  * base 定义浮层卡片的基础样式：圆角、阴影、背景色和最大宽度。
- * placement 变体定义箭头指向方向对应的 margin 偏移位置。
+ * placement 变体定义浮层相对触发元素的定位与间距偏移。
  */
 export const popoverVariants = cva(
   'absolute z-50 min-w-[120px] max-w-[360px] rounded-md border border-border ' +

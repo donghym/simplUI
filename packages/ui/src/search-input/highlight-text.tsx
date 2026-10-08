@@ -1,6 +1,5 @@
 import React from 'react'
 
-/** 高亮匹配关键词 */
 export function HighlightText({ text, keyword }: { text: string; keyword: string }) {
   if (!keyword) return <>{text}</>
   const parts: React.ReactNode[] = []
@@ -12,18 +11,18 @@ export function HighlightText({ text, keyword }: { text: string; keyword: string
   for (const match of matches) {
     const matchIndex = match.index ?? 0
     if (matchIndex > lastIndex) {
-      parts.push(text.slice(lastIndex, matchIndex))
+      parts.push(<React.Fragment key={`text-${keyIndex++}`}>{text.slice(lastIndex, matchIndex)}</React.Fragment>)
     }
     const matchedText = match[1] ?? ''
     parts.push(
-      <mark key={keyIndex++} className="bg-transparent text-primary font-medium">
+      <mark key={`mark-${keyIndex++}`} className="bg-transparent text-primary font-medium">
         {matchedText}
       </mark>,
     )
     lastIndex = matchIndex + matchedText.length
   }
   if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex))
+    parts.push(<React.Fragment key={`text-${keyIndex++}`}>{text.slice(lastIndex)}</React.Fragment>)
   }
   return <>{parts}</>
 }

@@ -61,3 +61,6 @@ export const calendarDateNumberVariants = cva(
     },
   }
 )
+
+/** 事件标记点样式 */
+export const calendarDotVariants = cva('w-1.5 h-1.5 rounded-full', { variants: {} })

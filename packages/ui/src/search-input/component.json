@@ -1,0 +1,9 @@
+{
+  "name": "search-input",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "SearchInput with highlight and suggestion support"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "cascader",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Cascader multi-level selection component"
+}

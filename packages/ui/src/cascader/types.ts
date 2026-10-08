@@ -46,8 +46,6 @@ export interface CascaderProps
   defaultOpen?: boolean
   /** 自定义显示函数，返回选中后输入框显示的内容 */
   displayRender?: (selectedOptions: CascaderOption[]) => ReactNode
-  /** 自定义字段名映射 */
-  fieldNames?: { label?: string; value?: string; children?: string }
   /** 自定义 className，通过 cn() + twMerge 合并 */
   className?: string
   /** 下拉菜单的 className */

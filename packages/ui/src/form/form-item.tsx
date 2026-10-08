@@ -40,7 +40,7 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(({
   const showRequired = required && requiredMark !== 'hide'
   const requiredNode = showRequired ? <RequiredMark /> : null
 
-  // label 容器（horizontal 时为右侧对齐，vertical/inline 时为上对齐）
+  // label 容器（horizontal 时水平对齐由 labelAlign 控制，默认右侧对齐；vertical/inline 时为上对齐）
   const labelClass =
     layout === 'horizontal'
       ? cn(

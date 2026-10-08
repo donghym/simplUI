@@ -1,0 +1,9 @@
+{
+  "name": "transfer",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Transfer for moving items between lists"
+}

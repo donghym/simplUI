@@ -1,0 +1,9 @@
+{
+  "name": "select",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Select dropdown with single/multiple selection support"
+}

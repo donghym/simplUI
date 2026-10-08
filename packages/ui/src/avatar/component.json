@@ -1,0 +1,8 @@
+{
+  "name": "avatar",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Avatar component with image, icon, and text fallback"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "upload",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "File upload component with drag-drop and preview support"
+}

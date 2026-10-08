@@ -107,7 +107,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(({
 
   return (
     <div ref={ref} className={cn('sui-tabs', 'flex', getContainerFlexClass(tabPosition), className)}>
-      {/* tabPosition=bottom 时面板内容在上 */}
+      {/* tabPosition=bottom/right 时面板内容在上/左 */}
       {tabPosition === 'bottom' || tabPosition === 'right' ? (
         <div
           id={`tabpanel-${activeKey}`}

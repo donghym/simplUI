@@ -1,0 +1,9 @@
+{
+  "name": "input-number",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Number input with stepper controls and min/max validation"
+}

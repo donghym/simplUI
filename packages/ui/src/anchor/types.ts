@@ -32,7 +32,7 @@ export interface AnchorProps
   offsetTop?: number
   /** 是否平滑滚动。默认 true */
   smooth?: boolean
-  /** 容器获取方式。提供时监听该容器的滚动事件 */
+  /** 滚动容器获取方式。提供时点击锚点将滚动该容器而非 window */
   getContainer?: () => HTMLElement | Window
   /** 自定义 className，通过 cn() + twMerge 合并 */
   className?: string

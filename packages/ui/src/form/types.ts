@@ -27,14 +27,14 @@ export interface FormProps extends Omit<FormHTMLAttributes<HTMLFormElement>, 'on
   /**
    * 标签列宽度配置（horizontal 模式下生效）
    *
-   * antd 默认 `{ span: 5 }`，本组件为了视觉平衡默认 `{ span: 8 }`。
-   * 可传 `8` 简写，等价于 `{ span: 8 }`。
+   * 默认 `{ span: 5 }`（antd 风格）。
+   * 可传数字简写，如 `5` 等价于 `{ span: 5 }`。
    */
   labelCol?: ResponsiveCol
   /**
    * 控件列宽度配置（horizontal 模式下生效）
    *
-   * antd 默认 `{ span: 19 }`，本组件默认 `{ span: 16 }`（与 labelCol 互补到 24）。
+   * 默认 `{ span: 19 }`（与 labelCol 互补到 24）。
    */
   wrapperCol?: ResponsiveCol
   /**

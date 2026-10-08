@@ -5,7 +5,6 @@ import { layoutVariants, siderVariants } from './layout-variants'
 import type { LayoutProps, HeaderProps, SiderProps, ContentProps, FooterProps } from './types'
 import { BREAKPOINT_MAP } from './types'
 
-// 布局上下文，提供当前是否折叠
 interface LayoutContextValue {
   siderCollapsed: boolean
   setSiderCollapsed: (collapsed: boolean) => void
@@ -17,11 +16,9 @@ function useLayoutContext() {
   return useContext(LayoutContext)
 }
 
-/** Layout 布局容器，支持嵌套，hasSider=true 时为水平布局，上下文管理 Sider 折叠状态 */
 const Layout = forwardRef<HTMLDivElement, LayoutProps>(({ hasSider, className, children, ...rest }, ref) => {
   const existingContext = useLayoutContext()
 
-  // 最外层 Layout 创建上下文，嵌套 Layout 继承
   const [innerCollapsed, setInnerCollapsed] = useState(false)
   const collapsedContext = existingContext || {
     siderCollapsed: innerCollapsed,
@@ -113,11 +110,14 @@ const Sider = forwardRef<HTMLElement, SiderProps>(({
     return () => window.removeEventListener('resize', checkBreakpoint)
   }, [breakpoint, broken, onBreakpoint])
 
-  // 自动收起当断点触发
   useEffect(() => {
-    if (!broken || !collapsible) return
+    if (!broken || !collapsible || collapsed) return
+    if (controlledCollapsed === undefined) {
+      setInnerCollapsed(true)
+    }
     context?.setSiderCollapsed?.(true)
-  }, [broken, collapsible, context])
+    onCollapse?.(true)
+  }, [broken, collapsible, collapsed, controlledCollapsed, context, onCollapse])
 
   const toggleCollapsed = () => {
     const next = !collapsed

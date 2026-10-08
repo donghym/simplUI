@@ -3,7 +3,7 @@ import type { MouseEventHandler } from 'react'
 export interface IconProps {
   /** 自定义 className，通过 cn() + twMerge 合并 */
   className?: string
-  /** 内联样式对象，优先级低于 className */
+  /** 内联样式对象，优先级高于 className */
   style?: React.CSSProperties
   /** 是否启用旋转动画。true 时图标持续旋转 */
   spin?: boolean
@@ -26,7 +26,7 @@ export interface CustomIconProps {
   component: React.ComponentType<React.SVGProps<SVGSVGElement>>
   /** 自定义 className，通过 cn() + twMerge 合并 */
   className?: string
-  /** 内联样式对象，优先级低于 className */
+  /** 内联样式对象，优先级高于 className */
   style?: React.CSSProperties
   /** 是否启用旋转动画。true 时图标持续旋转 */
   spin?: boolean

@@ -13,5 +13,13 @@ export function formatYearMonth(date: Date): string {
   return `${date.getFullYear()}年${date.getMonth() + 1}月`
 }
 
+/** 格式化日期为 YYYY-MM-DD */
+export function formatDate(date: Date): string {
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}
+
 export type { CalendarCellData } from './calendar-cells'
 export { getCalendarCells } from './calendar-cells'

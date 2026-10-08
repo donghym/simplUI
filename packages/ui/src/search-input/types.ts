@@ -12,7 +12,7 @@ export interface SearchInputProps
   defaultValue?: string
   /** 输入值变化回调 */
   onChange?: (value: string) => void
-  /** 搜索提交回调，按 Enter 或点击搜索图标时触发 */
+  /** 搜索提交回调，按 Enter 或选中建议项时触发 */
   onSearch?: (value: string) => void
   /** 搜索建议。字符串数组为静态建议，函数为异步建议 */
   suggestions?: string[] | ((value: string) => Promise<string[]>)
@@ -28,9 +28,7 @@ export interface SearchInputProps
   allowClear?: boolean
   /** 是否禁用 */
   disabled?: boolean
-  /** 搜索建议为空时的提示文本 */
-  emptyText?: string
-  /** localStorage 存储 key 前缀，默认 'simplui-search-history' */
+  /** localStorage 存储 key，默认 'simplui-search-history' */
   storageKey?: string
 }
 

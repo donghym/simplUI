@@ -1,0 +1,9 @@
+{
+  "name": "pro-form",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "ProForm with schema-based form generation"
+}

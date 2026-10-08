@@ -4,50 +4,80 @@ import { ConfigContext } from './config-provider-variants'
 import type { ConfigProviderProps, ConfigContextValue, ThemeConfig } from './types'
 
 /**
- * 生成主题色的色阶
- * 根据基础主题色生成 50-900 的色阶
+ * 颜色工具函数
+ */
+const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (result && result[1] && result[2] && result[3]) {
+    return {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    }
+  }
+  return { r: 0, g: 47, b: 167 } // 回退色 #002FA7
+}
+
+const rgbToHex = (r: number, g: number, b: number): string => {
+  const toHex = (n: number) => n.toString(16).padStart(2, '0')
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`
+}
+
+/** 调整颜色亮度 */
+function adjustBrightness(hex: string, factor: number): string {
+  const rgb = hexToRgb(hex)
+  if (factor > 1) {
+    const r = Math.min(255, Math.round(rgb.r + (255 - rgb.r) * (factor - 1)))
+    const g = Math.min(255, Math.round(rgb.g + (255 - rgb.g) * (factor - 1)))
+    const b = Math.min(255, Math.round(rgb.b + (255 - rgb.b) * (factor - 1)))
+    return rgbToHex(r, g, b)
+  } else {
+    const r = Math.round(rgb.r * factor)
+    const g = Math.round(rgb.g * factor)
+    const b = Math.round(rgb.b * factor)
+    return rgbToHex(r, g, b)
+  }
+}
+
+/** 添加透明度 */
+function addAlpha(hex: string, alpha: number): string {
+  const rgb = hexToRgb(hex)
+  return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`
+}
+
+/**
+ * 生成主题色的完整色板
+ * 根据基础主题色生成 50-900 色阶 + hover/focus/disabled 状态色
  */
 function generatePrimaryColors(baseColor: string): Record<string, string> {
-  // 简单的颜色变暗/变亮逻辑
-  const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-    if (result && result[1] && result[2] && result[3]) {
-      return {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-      }
-    }
-    return { r: 22, g: 119, b: 255 }
+  const colors: Record<string, string> = {
+    // 基础色（500）
+    DEFAULT: baseColor,
+    500: baseColor,
+    // hover: 稍亮
+    hover: adjustBrightness(baseColor, 1.15),
+    // focus: 15% 透明度
+    focus: addAlpha(baseColor, 0.15),
+    // disabled: 40% 亮度
+    disabled: adjustBrightness(baseColor, 0.4),
   }
 
-  const rgbToHex = (r: number, g: number, b: number): string => {
-    const toHex = (n: number) => n.toString(16).padStart(2, '0')
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`
-  }
-
-  const rgb = hexToRgb(baseColor)
-  const colors: Record<string, string> = {}
-
-  // 生成不同亮度的色阶
-  const scales = [
-    { key: '50', factor: 1.9 },
-    { key: '100', factor: 1.6 },
-    { key: '200', factor: 1.3 },
-    { key: '300', factor: 1.1 },
-    { key: '400', factor: 1.05 },
-    { key: '500', factor: 1 },
-    { key: '600', factor: 0.85 },
-    { key: '700', factor: 0.7 },
-    { key: '800', factor: 0.55 },
-    { key: '900', factor: 0.4 },
+  // 生成色阶
+  const scales: Array<[string, number]> = [
+    ['50', 1.95],
+    ['100', 1.7],
+    ['200', 1.45],
+    ['300', 1.2],
+    ['400', 1.1],
+    ['500', 1],
+    ['600', 0.85],
+    ['700', 0.7],
+    ['800', 0.55],
+    ['900', 0.4],
   ]
 
-  scales.forEach(({ key, factor }) => {
-    const r = Math.min(255, Math.round(rgb.r * factor + (factor > 1 ? 255 - 255 * factor : 0)))
-    const g = Math.min(255, Math.round(rgb.g * factor + (factor > 1 ? 255 - 255 * factor : 0)))
-    const b = Math.min(255, Math.round(rgb.b * factor + (factor > 1 ? 255 - 255 * factor : 0)))
-    colors[key] = rgbToHex(r, g, b)
+  scales.forEach(([key, factor]) => {
+    colors[key] = adjustBrightness(baseColor, factor)
   })
 
   return colors
@@ -76,7 +106,6 @@ const ConfigProvider = forwardRef<HTMLDivElement, ConfigProviderProps>((props, r
     children,
     theme: legacyTheme,
     themeConfig: userThemeConfig,
-    prefixCls = 'simplui',
     config = {},
     className
   } = props
@@ -84,7 +113,7 @@ const ConfigProvider = forwardRef<HTMLDivElement, ConfigProviderProps>((props, r
   // 合并主题配置（兼容 legacy theme 属性）
   const themeConfig: ThemeConfig = useMemo(() => ({
     mode: userThemeConfig?.mode || legacyTheme || 'light',
-    primaryColor: userThemeConfig?.primaryColor || '#1677FF',
+    primaryColor: userThemeConfig?.primaryColor || '#002FA7',
   }), [userThemeConfig, legacyTheme])
 
   const theme = themeConfig.mode || 'light'
@@ -93,10 +122,9 @@ const ConfigProvider = forwardRef<HTMLDivElement, ConfigProviderProps>((props, r
     () => ({
       theme,
       themeConfig,
-      prefixCls,
       config,
     }),
-    [theme, themeConfig, prefixCls, config]
+    [theme, themeConfig, config]
   )
 
   // 同步主题到 data-theme 属性

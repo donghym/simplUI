@@ -1,0 +1,9 @@
+{
+  "name": "time-picker",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Time picker with hour/minute/second selection"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "batch-operation",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "BatchOperation for bulk actions toolbar"
+}

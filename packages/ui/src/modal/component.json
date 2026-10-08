@@ -1,0 +1,9 @@
+{
+  "name": "modal",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Modal dialog with focus trap and ESC close support"
+}

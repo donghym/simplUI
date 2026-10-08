@@ -1,0 +1,8 @@
+{
+  "name": "progress",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Progress bar with circle and line variants"
+}

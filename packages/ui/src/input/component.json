@@ -1,0 +1,9 @@
+{
+  "name": "input",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Input component with status variants, prefix/suffix, and clear button"
+}

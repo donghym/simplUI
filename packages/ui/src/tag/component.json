@@ -1,0 +1,9 @@
+{
+  "name": "tag",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Tag component with closable and color variants"
+}

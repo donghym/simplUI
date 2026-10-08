@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { SortOrder, ColumnAlign, ColumnFixed } from './table-base-types'
-import type { CellProps, FilterOption } from './table-config-types'
+import type { CellProps } from './table-config-types'
 
 /** 排序比较函数 */
 export type SorterFn<T> = (a: T, b: T, order: SortOrder) => number
@@ -40,8 +40,6 @@ export interface ColumnType<T> {
   onCell?: (record: T, index: number) => CellProps
   /** 自定义表头单元格属性 */
   onHeaderCell?: (column: ColumnType<T>) => CellProps
-  /** 过滤选项 */
-  filters?: FilterOption[]
   /** 过滤函数 */
   onFilter?: FilterFn<T>
   /** 是否多选过滤 */
@@ -50,10 +48,4 @@ export interface ColumnType<T> {
   defaultFilteredValue?: (string | number | boolean)[]
   /** 受控过滤值 */
   filteredValue?: (string | number | boolean)[]
-  /** 过滤下拉菜单 */
-  filterDropdown?: ReactNode
-  /** 是否可编辑 */
-  editable?: boolean
-  /** 编辑单元格渲染 */
-  renderEdit?: (value: unknown, record: T, index: number, onSave: (value: unknown) => void) => ReactNode
 }

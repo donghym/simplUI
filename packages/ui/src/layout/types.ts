@@ -41,7 +41,7 @@ export interface HeaderProps extends HTMLAttributes<HTMLElement> {
 export interface SiderProps extends HTMLAttributes<HTMLElement>, VariantProps<typeof siderVariants> {
   /** 侧边栏宽度，默认 200 */
   width?: number | string
-  /** 收起后的宽度，默认 80；设为 0 时会出现特殊 trigger */
+  /** 收起后的宽度，默认 80 */
   collapsedWidth?: number
   /** 是否可收起，默认 false */
   collapsible?: boolean

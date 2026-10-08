@@ -27,7 +27,7 @@ export const tooltipVariants = cva(
 /**
  * 箭头变体配置
  *
- * 使用 CSS border 技巧绘制三角形，方向指向触发元素。
+ * 使用旋转 45° 的正方形绘制三角形，方向指向触发元素。
  * 箭头方向与 placement 相反，例如 placement='top' 时箭头朝下指向触发元素。
  */
 export const tooltipArrowVariants = cva(

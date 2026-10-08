@@ -1,0 +1,6 @@
+{
+  "name": "icon",
+  "version": "1.0.0",
+  "dependencies": [],
+  "description": "Icon component with custom SVG support and icon set"
+}

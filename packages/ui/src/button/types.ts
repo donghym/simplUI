@@ -26,7 +26,7 @@ export interface ButtonProps
   block?: boolean
   /** 图标内容，支持任意 ReactNode，loading 时会被 spinner 替换 */
   icon?: ReactNode
-  /** 图标位置，默认 'left'，仅当 icon 存在时生效 */
+  /** 图标位置，默认 'left'，存在 icon 或 loading spinner 时生效 */
   iconPosition?: 'left' | 'right'
   /** 使用 Radix Slot 透传 props 到子元素，true 时 children 必须是单个元素 */
   asChild?: boolean

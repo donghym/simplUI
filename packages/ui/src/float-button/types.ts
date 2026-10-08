@@ -17,7 +17,7 @@ export interface FloatButtonProps {
   className?: string
   /** 提示气泡 */
   tooltip?: ReactNode
-  /** 按钮位置 */
+  /** 提示气泡弹出位置 */
   placement?: 'top' | 'left' | 'right' | 'bottom'
 }
 

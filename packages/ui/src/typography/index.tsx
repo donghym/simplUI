@@ -6,7 +6,7 @@ import type { TextProps, TitleProps, ParagraphProps } from './types'
 /**
  * Text 行内文本
  *
- * 支持 4 种文本类型（secondary/success/warning/danger）及 6 种内联样式。
+ * 支持 4 种文本类型（secondary/success/warning/danger）及 7 种内联样式。
  * 根据内联样式动态渲染不同 HTML 标签：code -> <code>, keyboard -> <kbd>, delete -> <del>, mark -> <mark>, 默认 -> <span>
  */
 const Text = forwardRef<HTMLElement, TextProps>(({

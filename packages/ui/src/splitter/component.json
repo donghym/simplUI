@@ -1,0 +1,8 @@
+{
+  "name": "splitter",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Splitter panel for resizable layouts"
+}

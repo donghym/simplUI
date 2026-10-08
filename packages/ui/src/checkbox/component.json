@@ -1,0 +1,9 @@
+{
+  "name": "checkbox",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Checkbox component with group support and indeterminate state"
+}

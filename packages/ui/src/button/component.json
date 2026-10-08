@@ -1,0 +1,10 @@
+{
+  "name": "button",
+  "version": "1.0.0",
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Button component with 5 variants and loading state"
+}

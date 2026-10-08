@@ -12,7 +12,7 @@ export interface ListProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChang
   header?: ReactNode
   /** 列表底部内容 */
   footer?: ReactNode
-  /** 是否显示分割线。默认 false */
+  /** 是否显示边框。默认 false */
   bordered?: boolean
   /** 是否显示加载状态。默认 false */
   loading?: boolean

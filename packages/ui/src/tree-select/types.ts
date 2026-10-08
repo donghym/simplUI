@@ -16,10 +16,6 @@ export interface TreeNode {
   disableCheckbox?: boolean
   /** 是否为叶子节点，不传则根据 children 判断 */
   isLeaf?: boolean
-  /** 是否选中（受控模式） */
-  selected?: boolean
-  /** 是否展开（受控模式） */
-  expanded?: boolean
   /** 自定义数据，用于回调中传递 */
   data?: unknown
 }

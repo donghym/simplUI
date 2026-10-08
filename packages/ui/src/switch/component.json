@@ -1,0 +1,9 @@
+{
+  "name": "switch",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Switch toggle component with checked state, loading, disabled"
+}

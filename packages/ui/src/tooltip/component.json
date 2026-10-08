@@ -1,0 +1,8 @@
+{
+  "name": "tooltip",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Tooltip text hint with hover/focus/click trigger"
+}

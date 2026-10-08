@@ -1,0 +1,9 @@
+{
+  "name": "pro-table",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "ProTable with search, toolbar, and async data support"
+}

@@ -91,7 +91,16 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
     const handleClearHistory = (e: React.MouseEvent) => { e.stopPropagation(); clearHistory(storageKey); setHistoryList([]) }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') { e.preventDefault(); doSearch(currentValue); return }
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        const highlightedItem = displayItems[highlightedIndex]
+        if (open && highlightedItem) {
+          handleSelect(highlightedItem)
+          return
+        }
+        doSearch(currentValue)
+        return
+      }
       if (!open || displayItems.length === 0) {
         if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); setOpen(true) }
         return

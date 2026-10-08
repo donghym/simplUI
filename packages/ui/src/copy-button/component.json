@@ -1,0 +1,9 @@
+{
+  "name": "copy-button",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "CopyButton for copying text to clipboard"
+}

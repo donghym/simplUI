@@ -21,14 +21,6 @@ export interface UploadProps {
   onChange?: (info: UploadChangeInfo) => void
   /** 自定义上传请求函数，接收文件及进度/成功/失败回调 */
   customRequest?: (options: CustomRequestOptions) => void
-  /** 上传地址 URL，提供后使用内置 fetch 执行上传 */
-  action?: string
-  /** 上传请求头部，配合 action 使用 */
-  headers?: Record<string, string>
-  /** 上传附加表单数据，配合 action 使用，键为字段名值为字段值 */
-  data?: Record<string, string | Blob>
-  /** 文件参数字段名，配合 action 使用，默认 'file' */
-  name?: string
   /** 是否支持多选文件，默认 false，同时影响 input multiple 属性 */
   multiple?: boolean
   /** 接受的文件类型 MIME 或扩展名，如 'image/*' 或 '.png,.jpg' */

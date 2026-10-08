@@ -3,7 +3,14 @@ import type { VariantProps } from 'class-variance-authority'
 import { timelineVariants, timelineItemVariants } from './timeline-variants'
 
 /** 时间线节点状态 */
-export type TimelineStatus = 'completed' | 'active' | 'pending'
+export type TimelineStatus =
+  | 'completed'
+  | 'active'
+  | 'pending'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'processing'
 
 /** 时间线节点位置 */
 export type TimelineMode = 'left' | 'right' | 'alternate'
@@ -16,6 +23,8 @@ export interface TimelineItem {
   title?: ReactNode
   /** 描述/状态标签 */
   description?: ReactNode
+  /** 内容 */
+  content?: ReactNode
   /** 时间 */
   time?: ReactNode
   /** 自定义图标 */
@@ -54,6 +63,10 @@ export interface TimelineProps
   items?: TimelineItem[]
   /** 子元素（TimelineItem） */
   children?: ReactNode
+  /** 是否可折叠。true 时超过指定数量后折叠，默认 false */
+  collapsible?: boolean
+  /** 折叠前显示的节点数量，默认 3 */
+  collapseCount?: number
   /** 自定义 className */
   className?: string
 }

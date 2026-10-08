@@ -23,7 +23,7 @@ export interface SpaceProps extends HTMLAttributes<HTMLDivElement>, VariantProps
   componentSize?: SpaceSize
   /** 对齐方式，默认 'center' */
   align?: SpaceAlign
-  /** 是否自动换行（仅 horizontal 有效），默认 false */
+  /** 是否自动换行，默认 false */
   wrap?: boolean
   /** 是否用分隔线分隔，传入 ReactNode 时作为分隔线内容 */
   split?: React.ReactNode

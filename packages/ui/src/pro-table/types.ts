@@ -35,14 +35,8 @@ export interface ProTableColumn<T = Record<string, string | number>> {
   dataIndex: string
   /** 是否在表格中隐藏。true 时该列不渲染，默认 false */
   hideInTable?: boolean
-  /** 筛选选项，提供后列头显示筛选下拉 */
-  filters?: { text: string; value: string }[]
   /** 排序配置。true 启用排序，函数为自定义排序 */
   sorter?: boolean | ((a: T, b: T) => number)
-  /** 是否可编辑。true 时双击进入编辑态 */
-  editable?: boolean
-  /** 编辑态表单项渲染 */
-  renderFormItem?: (props: { value: unknown; onChange: (val: unknown) => void }) => ReactNode
   /** 值类型，决定渲染方式。默认 'text' */
   valueType?: ProTableValueType
   /** 列宽度，像素值或百分比字符串 */
@@ -63,7 +57,7 @@ export interface ProTableProps<T = Record<string, string | number>> extends Omit
   search?: boolean | { defaultCollapsed?: boolean }
   /** 工具栏配置。true 显示默认工具栏（刷新/列设置），对象形式可自定义操作 */
   toolbar?: boolean | { actions?: ReactNode[] }
-  /** 是否手动触发请求。true 时不自动请求，需调用 reload */
+  /** 是否手动触发请求。true 时不自动请求，需通过搜索或工具栏刷新按钮触发 */
   manualRequest?: boolean
   /** 轮询间隔毫秒数。大于 0 时定时刷新数据 */
   polling?: number

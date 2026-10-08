@@ -105,6 +105,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(({
           role="menu"
           tabIndex={-1}
           className={cn(dropdownMenuVariants({ placement }))}
+          onClick={(e) => e.stopPropagation()}
         >
           {menu}
         </div>
@@ -148,6 +149,7 @@ const DropdownItem = forwardRef<HTMLDivElement, DropdownItemProps>(({
   className,
 }, ref) => {
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
     if (disabled) {
       e.preventDefault()
       return

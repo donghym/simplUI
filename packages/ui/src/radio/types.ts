@@ -21,8 +21,6 @@ export interface RadioProps
     VariantProps<typeof radioDotVariants> {
   /** 受控模式下的选中状态，true 为选中 */
   checked?: boolean
-  /** 非受控模式下的初始选中状态，默认 false */
-  defaultChecked?: boolean
   /** 禁用状态，true 时不可交互、灰色半透明显示 */
   disabled?: boolean
   /** Radio 的值，在 Radio.Group 中用于标识选中项 */

@@ -1,0 +1,9 @@
+{
+  "name": "infinite-scroll",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "InfiniteScroll for endless list loading"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "rate",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Rate star rating component"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "avatar-group",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "AvatarGroup for displaying multiple avatars"
+}

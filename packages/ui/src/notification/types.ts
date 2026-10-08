@@ -27,7 +27,7 @@ export interface NotificationProps extends VariantProps<typeof notificationVaria
   duration?: number
   /** 是否显示关闭按钮。默认 true */
   closable?: boolean
-  /** 通知关闭时的回调，在动画结束后触发 */
+  /** 通知关闭时的回调 */
   onClose?: () => void
   /** 自定义图标，不传则按 type 自动匹配默认图标 */
   icon?: ReactNode

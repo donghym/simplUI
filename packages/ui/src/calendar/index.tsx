@@ -12,16 +12,17 @@ import {
   calendarWeekdayVariants,
   calendarCellVariants,
   calendarDateNumberVariants,
+  calendarDotVariants,
 } from './calendar-cell-variants'
 import { getCalendarCells, formatYearMonth } from './calendar-utils'
-import type { CalendarProps, CalendarMode } from './types'
+import type { CalendarProps, CalendarMode, CalendarEvent } from './types'
 
 const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六']
 
 /**
  * Calendar 日历组件
  *
- * 按月展示日期，支持日期选择、禁用日期、自定义渲染。
+ * 按月展示日期，支持日期选择、禁用日期、自定义渲染、事件标记。
  * 支持受控（value）和非受控（defaultValue）两种模式。
  */
 export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
@@ -36,6 +37,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       disabledDate,
       dateCellRender,
       dateFullCellRender,
+      events = [],
+      dateCellRenderWithEvents,
       headerRender = true,
       className,
       ...rest
@@ -59,9 +62,20 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
     const year = currentDate.getFullYear()
     const month = currentDate.getMonth()
 
+    // 构建事件映射表
+    const eventsMap = useMemo(() => {
+      const map = new Map<string, CalendarEvent[]>()
+      for (const evt of events) {
+        const list = map.get(evt.date) ?? []
+        list.push(evt)
+        map.set(evt.date, list)
+      }
+      return map
+    }, [events])
+
     const cells = useMemo(
-      () => getCalendarCells(year, month, selectedDate, today, disabledDate),
-      [year, month, selectedDate, today, disabledDate],
+      () => getCalendarCells(year, month, selectedDate, today, disabledDate, eventsMap),
+      [year, month, selectedDate, today, disabledDate, eventsMap],
     )
 
     const handlePrev = useCallback(() => {
@@ -154,6 +168,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
             >
               {dateFullCellRender ? (
                 dateFullCellRender(cell.date)
+              ) : dateCellRenderWithEvents ? (
+                dateCellRenderWithEvents(cell.date, cell.events)
               ) : (
                 <>
                   <span
@@ -166,6 +182,14 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                   >
                     {cell.date.getDate()}
                   </span>
+                  {cell.events.length > 0 && (
+                    <div className="flex gap-0.5 mt-1 flex-wrap">
+                      {cell.events.slice(0, 3).map((evt, i) => (
+                        <span key={i} className={cn(calendarDotVariants(), evt.color ? '' : 'bg-primary-500')} style={evt.color ? { backgroundColor: evt.color } : undefined} />
+                      ))}
+                    </div>
+                  )}
+                  {cell.events.length > 3 && <span className="text-[10px] text-muted-foreground">+{cell.events.length - 3}</span>}
                   {dateCellRender && (
                     <div className="mt-1">{dateCellRender(cell.date)}</div>
                   )}
@@ -181,7 +205,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
 
 Calendar.displayName = 'Calendar'
 
-export type { CalendarProps, CalendarMode } from './types'
+export type { CalendarProps, CalendarMode, CalendarEvent } from './types'
 export {
   calendarVariants,
   calendarHeaderVariants,
@@ -193,4 +217,8 @@ export {
   calendarWeekdayVariants,
   calendarCellVariants,
   calendarDateNumberVariants,
+  calendarDotVariants,
 } from './calendar-cell-variants'
+
+// 导出 EventCalendar 作为别名保持向后兼容
+export { Calendar as EventCalendar }

@@ -23,7 +23,7 @@ export interface RateProps
   allowHalf?: boolean
   /** 是否只读，只读模式下不可交互，默认 false */
   readonly?: boolean
-  /** 是否禁用，禁用后不可交互且显示灰色，默认 false */
+  /** 是否禁用，禁用后不可交互且半透明显示，默认 false */
   disabled?: boolean
   /** 自定义字符，用于替换默认星星图标 */
   character?: ReactNode

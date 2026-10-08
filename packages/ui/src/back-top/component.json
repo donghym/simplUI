@@ -1,0 +1,9 @@
+{
+  "name": "back-top",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "BackTop scroll to top button"
+}

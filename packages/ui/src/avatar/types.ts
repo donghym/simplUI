@@ -45,7 +45,7 @@ export interface AvatarProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'colo
    *
    * img 元素 onerror 事件触发时调用。
    * 返回 false 可阻止默认的文字/图标回退行为，
-   * 此时头像保持空状态（灰色背景，无内容）。
+   * 此时保持 img 元素渲染。
    */
   onError?: () => boolean | void
 }

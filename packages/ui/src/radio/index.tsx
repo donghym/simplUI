@@ -26,7 +26,7 @@ RadioGroupContext.displayName = 'RadioGroupContext'
  *
  * 单选控件，在多个互斥选项中选择一个。
  * 在 Radio.Group 内时选中状态由 Group 统一管理；
- * 独立使用时支持受控（checked）和非受控（defaultChecked）模式。
+ * 独立使用时为受控模式（checked）。
  */
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const {

@@ -20,7 +20,7 @@ export interface TooltipProps
   defaultOpen?: boolean
   /** 打开/关闭变化时的回调 */
   onOpenChange?: (open: boolean) => void
-  /** 箭头是否指向目标中心。默认 true */
+  /** 是否显示箭头。默认 true */
   arrow?: boolean
   /** 气泡卡片打开延迟（毫秒）。默认 100 */
   openDelay?: number

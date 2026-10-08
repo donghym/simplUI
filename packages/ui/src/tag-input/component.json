@@ -1,0 +1,9 @@
+{
+  "name": "tag-input",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "TagInput for entering multiple tags"
+}

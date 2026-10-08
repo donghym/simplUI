@@ -14,7 +14,7 @@ const VARIANT_CLASS: Record<DividerVariant, string> = {
  * Divider 分割线组件
  *
  * 用于分割页面内容区域。支持水平/垂直方向、三种线型和内嵌文字。
- * 当 type='horizontal' 且有 children 时，文字将嵌入在分割线中间。
+ * 当 type='horizontal' 且有 children 时，文字嵌入分割线，位置由 orientation 控制（默认居中）。
  */
 const Divider = forwardRef<HTMLDivElement, DividerProps>(({
   type = 'horizontal',

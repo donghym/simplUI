@@ -27,7 +27,7 @@ export interface SliderProps
   disabled?: boolean
   /** 是否为范围选择（双滑块），默认 false */
   range?: boolean
-  /** 是否显示刻度标记 */
+  /** 刻度标记配置，提供后在轨道上显示标记点和标签 */
   marks?: SliderMark[]
   /** 是否显示 tooltip，默认 true */
   showTooltip?: boolean

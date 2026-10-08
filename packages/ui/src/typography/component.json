@@ -1,0 +1,8 @@
+{
+  "name": "typography",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Typography components: Text, Title, Paragraph with style variants"
+}

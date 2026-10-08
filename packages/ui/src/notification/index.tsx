@@ -44,10 +44,14 @@ export const Notification = forwardRef<HTMLDivElement, NotificationProps>((props
   }
 
   useEffect(() => {
-    if (duration <= 0) return
+    setVisible(visibleProp)
+  }, [visibleProp])
+
+  useEffect(() => {
+    if (!visible || duration <= 0) return
     const timer = setTimeout(handleClose, duration)
     return () => clearTimeout(timer)
-  }, [])
+  }, [visible, duration])
 
   if (!visible) return null
 

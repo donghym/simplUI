@@ -20,7 +20,7 @@ export interface InputNumberProps
   value?: number | null
   /** 默认数值（非受控模式），null 表示空值 */
   defaultValue?: number | null
-  /** 数值变化回调，参数为新的数值，null 表示无效输入或已清空 */
+  /** 数值变化回调，参数为新的数值，null 表示已清空 */
   onChange?: (value: number | null) => void
   /** 最小值，超出范围时自动修正到边界 */
   min?: number
@@ -28,7 +28,7 @@ export interface InputNumberProps
   max?: number
   /** 每次加减的步长，默认 1 */
   step?: number
-  /** 小数精度（保留几位小数），默认 0，仅在 blur 时格式化显示 */
+  /** 小数精度（保留几位小数），不传时不强制格式化 */
   precision?: number
   /** 状态变体：error 显示红色边框，warning 显示黄色边框 */
   status?: InputNumberStatus

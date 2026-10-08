@@ -21,7 +21,7 @@ export const formVariants = cva('', {
 /**
  * FormItem 行
  *
- * - horizontal: flex row，label 右对齐 + 垂直居中
+ * - horizontal: flex row，label 默认右对齐 + 垂直居中
  * - vertical:   flex col，label 在上
  * - inline:     flex col，label 在上
  */

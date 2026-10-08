@@ -1,0 +1,9 @@
+{
+  "name": "timeline",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Timeline vertical list component"
+}

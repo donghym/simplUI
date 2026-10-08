@@ -20,8 +20,6 @@ export interface ConfigProviderProps {
   theme?: 'light' | 'dark'
   /** 主题配置 */
   themeConfig?: ThemeConfig
-  /** 组件前缀 */
-  prefixCls?: string
   /** 全局配置对象 */
   config?: Record<string, unknown>
   /** 自定义类名 */
@@ -36,8 +34,6 @@ export interface ConfigContextValue {
   theme: 'light' | 'dark'
   /** 主题配置 */
   themeConfig: ThemeConfig
-  /** 组件类名前缀，用于生成所有组件的 CSS 类名前缀 */
-  prefixCls: string
   /** 全局配置对象，可存储任意键值对供子组件读取 */
   config: Record<string, unknown>
 }
@@ -49,9 +45,8 @@ export const defaultConfig: ConfigContextValue = {
   theme: 'light',
   themeConfig: {
     mode: 'light',
-    primaryColor: '#1677FF',
+    primaryColor: '#002FA7',
   },
-  prefixCls: 'simplui',
   config: {},
 }
 

@@ -5,20 +5,7 @@ import type { FloatButtonProps, FloatButtonGroupProps } from './types'
 
 export type { FloatButtonProps, FloatButtonGroupProps }
 
-/**
- * FloatButton 悬浮按钮组件
- *
- * 用于在页面中悬浮展示的重要操作按钮。
- *
- * ### 何时使用
- * - 用于全局功能入口，如返回顶部、客服、反馈等
- * - 固定在页面可视区域的按钮
- *
- * ### 示例
- * ```tsx
- * <FloatButton icon={<CustomerServiceOutlined />} onClick={() => {}} />
- * ```
- */
+/** 在页面中悬浮展示的重要操作按钮。 */
 const FloatButton = forwardRef<HTMLDivElement, FloatButtonProps>(({
   icon,
   description,
@@ -34,13 +21,21 @@ const FloatButton = forwardRef<HTMLDivElement, FloatButtonProps>(({
 
   const showTooltip = useCallback(() => setTooltipVisible(true), [])
   const hideTooltip = useCallback(() => setTooltipVisible(false), [])
+  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+    event.preventDefault()
+    onClick?.()
+  }, [onClick])
 
   return (
     <div
       ref={ref}
+      role="button"
+      tabIndex={0}
       className={cn(floatButtonVariants({ type, shapeVariant }), `sui-float-button--${type}`, className)}
       style={style}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}
     >

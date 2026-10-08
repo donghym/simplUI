@@ -1,0 +1,8 @@
+{
+  "name": "segmented",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Segmented control for toggle selection"
+}

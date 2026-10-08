@@ -32,8 +32,6 @@ function toTableColumns<T>(columns: ProTableColumn<T>[], visibleKeys: Set<string
       sorter: typeof col.sorter === 'function'
         ? (a: T, b: T) => (col.sorter as (a: T, b: T) => number)(a, b)
         : col.sorter === true ? true : undefined,
-      filters: col.filters, editable: col.editable,
-      renderEdit: col.renderFormItem ? (value, _r, _i, onSave) => col.renderFormItem!({ value, onChange: onSave }) : undefined,
     }
     if (col.render) base.render = col.render
     else if (col.valueType && col.valueType !== 'text') base.render = (value) => renderByValueType(value, col.valueType as ProTableValueType)

@@ -34,8 +34,7 @@ AnchorLink.displayName = 'AnchorLink'
 /**
  * Anchor 锚点导航
  *
- * 用于页面内快速导航，支持监听滚动自动高亮当前锚点。
- * 点击锚点平滑滚动到对应位置。
+ * 用于页面内快速导航，点击锚点平滑滚动到对应位置并高亮。
  */
 const Anchor = forwardRef<HTMLDivElement, AnchorProps>((props, ref) => {
   const {

@@ -1,0 +1,131 @@
+const path = require('path');
+
+/** 主题与仓库根目录 tailwind.config.js 保持一致，content 额外扫文档站。 */
+module.exports = {
+  content: [
+    path.join(__dirname, '../ui/src/**/*.{js,ts,jsx,tsx}'),
+    path.join(__dirname, 'docs/**/*.{md,mdx,tsx,ts,jsx,js}'),
+    path.join(__dirname, 'src/**/*.{css,tsx,ts}'),
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // 主色系（含状态色）
+        primary: {
+          DEFAULT: '#002FA7',
+          hover: '#0038C9',
+          focus: '#002FA720',
+          disabled: '#8097D3',
+          50: '#e6f0ff',
+          100: '#b3d1ff',
+          200: '#80b3ff',
+          300: '#4d94ff',
+          400: '#2986f7',
+          500: '#002FA7',
+          600: '#00268a',
+          700: '#001d66',
+          800: '#00144d',
+          900: '#000b33',
+        },
+        success: {
+          DEFAULT: '#73AE50',
+          hover: '#85C262',
+          focus: '#73AE5020',
+          disabled: '#B8D7A7',
+          50: '#e8f5e8',
+          100: '#d1ebd1',
+          200: '#b8e0b8',
+          300: '#95d495',
+          400: '#6ec76e',
+          500: '#73AE50',
+          600: '#5f9243',
+          700: '#4b7536',
+          800: '#375829',
+          900: '#233b1c',
+        },
+        warning: {
+          DEFAULT: '#F8C91C',
+          hover: '#FAD448',
+          focus: '#F8C91C20',
+          disabled: '#FCE48D',
+          50: '#fffbe8',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#F8C91C',
+          600: '#d4ab17',
+          700: '#b08d12',
+          800: '#8c6f0e',
+          900: '#685109',
+        },
+        danger: {
+          DEFAULT: '#D7000F',
+          hover: '#E63240',
+          focus: '#D7000F20',
+          disabled: '#EB8087',
+          50: '#fff1f0',
+          100: '#ffccc7',
+          200: '#ffa39e',
+          300: '#ff7875',
+          400: '#ff4d4f',
+          500: '#D7000F',
+          600: '#ba000d',
+          700: '#9d000a',
+          800: '#800008',
+          900: '#630006',
+        },
+        // 中性灰
+        gray: {
+          50: '#FFFFFF',
+          100: '#F2F3F5',
+          200: '#E5E6EB',
+          300: '#C9CDD4',
+          400: '#86909C',
+          500: '#6E7681',
+          600: '#535A63',
+          700: '#3D434D',
+          800: '#2E333A',
+          900: '#1D2129',
+        },
+        // 文本颜色
+        text: {
+          DEFAULT: '#121212',
+          hover: '#2A2A2A',
+          focus: '#12121220',
+          disabled: '#8E8E8E',
+        },
+        muted: {
+          DEFAULT: '#F2F3F5',
+          foreground: '#86909C',
+        },
+        foreground: '#121212',
+        background: '#FFFFFF',
+        border: '#E5E6EB',
+        ring: '#002FA7',
+      },
+      fontFamily: {
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+      },
+      boxShadow: {
+        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
+        md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
+        lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
+      },
+      spacing: {
+        128: '32rem',
+      },
+      borderRadius: {
+        lg: '0.5rem',
+        xl: '0.75rem',
+        '2xl': '1rem',
+      },
+    },
+  },
+  // 不重置 dumi 文档壳的基础样式，只生成组件用到的工具类
+  corePlugins: {
+    preflight: false,
+  },
+  plugins: [],
+};

@@ -1,0 +1,6 @@
+{
+  "name": "config-provider",
+  "version": "1.0.0",
+  "dependencies": [],
+  "description": "ConfigProvider global configuration component"
+}

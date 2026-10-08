@@ -1,0 +1,8 @@
+{
+  "name": "badge",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Badge component for status indicators and counts"
+}

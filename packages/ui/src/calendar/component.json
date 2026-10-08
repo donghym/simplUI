@@ -1,0 +1,9 @@
+{
+  "name": "calendar",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Calendar month view with date selection"
+}

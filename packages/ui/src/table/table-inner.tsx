@@ -134,7 +134,7 @@ export function TableInner<T>(
     [finalColumns, rowKey, selectedKeys, tableSize, fixedOffsets, rowClassName, onRow, expandable, isRowExpanded],
   )
 
-  // 计算列宽总和，用于设置表格最小宽度
+  // 计算列宽总和，用于设置表格宽度
   const totalColumnWidth = useMemo(() => {
     return finalColumns.reduce((sum, col) => {
       const colWidth = typeof col.width === 'number' ? col.width : 0

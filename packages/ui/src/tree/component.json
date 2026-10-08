@@ -1,0 +1,9 @@
+{
+  "name": "tree",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Tree component with expandable nodes and selection"
+}

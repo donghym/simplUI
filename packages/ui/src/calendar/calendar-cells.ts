@@ -1,3 +1,6 @@
+import type { CalendarEvent } from './types'
+import { formatDate } from './calendar-utils'
+
 /** 日历单元格数据类型 */
 export interface CalendarCellData {
   date: Date
@@ -5,6 +8,7 @@ export interface CalendarCellData {
   isToday: boolean
   isSelected: boolean
   disabled: boolean
+  events: CalendarEvent[]
 }
 
 /** 获取日历单元格数据 */
@@ -14,6 +18,7 @@ export function getCalendarCells(
   selectedDate: Date | undefined,
   today: Date,
   disabledDate?: (date: Date) => boolean,
+  eventsMap?: Map<string, CalendarEvent[]>,
 ): CalendarCellData[] {
   const firstDay = new Date(year, month, 1)
   const startDayOfWeek = firstDay.getDay()
@@ -21,12 +26,15 @@ export function getCalendarCells(
   const daysInPrevMonth = new Date(year, month - 1, 0).getDate()
 
   const cells: CalendarCellData[] = []
+  const isSameDay = (a: Date, b: Date) => a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
   const push = (date: Date, isCurrentMonth: boolean) => {
     cells.push({
-      date, isCurrentMonth,
-      isToday: date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate(),
-      isSelected: selectedDate ? date.getFullYear() === selectedDate.getFullYear() && date.getMonth() === selectedDate.getMonth() && date.getDate() === selectedDate.getDate() : false,
+      date,
+      isCurrentMonth,
+      isToday: isSameDay(date, today),
+      isSelected: selectedDate ? isSameDay(date, selectedDate) : false,
       disabled: disabledDate ? disabledDate(date) : false,
+      events: eventsMap?.get(formatDate(date)) ?? [],
     })
   }
 

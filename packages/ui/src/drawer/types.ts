@@ -15,7 +15,7 @@ export interface DrawerProps
     VariantProps<typeof drawerVariants> {
   /** 抽屉是否可见，受控 */
   open: boolean
-  /** 关闭回调（点击遮罩层或关闭按钮时触发） */
+  /** 关闭回调（点击遮罩层、关闭按钮或按 ESC 时触发） */
   onClose: () => void
   /** 抽屉标题 */
   title?: ReactNode

@@ -26,7 +26,7 @@ export interface CollapseProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onC
   defaultActiveKey?: string[]
   /** 展开面板时的回调 */
   onChange?: (activeKey: string[]) => void
-  /** 是否允许同时展开多个面板。默认 true */
+  /** 是否开启手风琴模式，开启后同一时间仅可展开一个面板。默认 false */
   accordion?: boolean
   /** 子元素（CollapsePanel） */
   children?: ReactNode

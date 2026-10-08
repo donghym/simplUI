@@ -1,0 +1,9 @@
+{
+  "name": "statistic",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Statistic number display component"
+}

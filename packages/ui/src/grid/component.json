@@ -1,0 +1,8 @@
+{
+  "name": "grid",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Grid system with Row and Col components for responsive layouts"
+}

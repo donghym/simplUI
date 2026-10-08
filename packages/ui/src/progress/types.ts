@@ -20,7 +20,7 @@ export interface ProgressProps
   status?: ProgressStatus
   /** 是否显示进度文字 */
   showText?: boolean
-  /** 进度条宽度（仅 line 形状），单位 px */
+  /** 线性进度条的轨道高度或圆形进度条的描边宽度，单位 px */
   strokeWidth?: number
   /** 圆形进度条直径（仅 circle 形状），单位 px */
   circleSize?: number

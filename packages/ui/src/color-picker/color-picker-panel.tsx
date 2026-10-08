@@ -89,7 +89,7 @@ export const ColorPickerPanel: React.FC<PanelProps> = ({
       }}
       onClick={(e) => e.stopPropagation()}
     >
-      {/* color preview */}
+      {/* 颜色选取区 */}
       <div
         className="h-40 rounded relative mb-2 cursor-crosshair bg-[linear-gradient(to_top,#000,transparent),linear-gradient(to_right,#fff,var(--hue-color))]"
         style={{ '--hue-color': hsvToHex(hsv.h, 100, 100) } as React.CSSProperties}
@@ -106,7 +106,7 @@ export const ColorPickerPanel: React.FC<PanelProps> = ({
         />
       </div>
 
-      {/* hue slider */}
+      {/* 色相滑块 */}
       <div className="mb-2">
         <div
           ref={hueRef}
@@ -120,7 +120,7 @@ export const ColorPickerPanel: React.FC<PanelProps> = ({
         </div>
       </div>
 
-      {/* format display + clear */}
+      {/* 格式显示与清空按钮 */}
       <div className="flex items-center gap-1 mb-2">
         <div
           onClick={onFormatCycle}
@@ -139,7 +139,7 @@ export const ColorPickerPanel: React.FC<PanelProps> = ({
         )}
       </div>
 
-      {/* presets */}
+      {/* 预设颜色 */}
       {mergedPresets.map((group) => (
         <div key={group.label} className="mb-1">
           <div className="text-[11px] text-muted-foreground mb-1 select-none">

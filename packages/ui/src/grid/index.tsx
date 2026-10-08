@@ -1,46 +1,43 @@
-import { forwardRef } from 'react'
+import { createContext, forwardRef, useContext, type CSSProperties } from 'react'
 import { cn } from '../lib/utils'
 import { rowVariants, colVariants } from './grid-variants'
 import { getSpanClass, getResponsiveClass } from './grid-utils'
 import type { RowProps, ColProps } from './types'
 
-/**
- * Row 栅格行
- *
- * 基于 flexbox 的 24 列栅格行容器。
- * gutter 通过负 margin 实现列间距。
- */
+type Gutter = [number, number]
+
+const GutterContext = createContext<Gutter>([0, 0])
+
+function normalizeGutter(gutter: RowProps['gutter'] = 0): Gutter {
+  return typeof gutter === 'number' ? [gutter, gutter] : gutter
+}
+
 const Row = forwardRef<HTMLDivElement, RowProps>(
-  ({ gutter = 0, align = 'top', justify = 'start', wrap = true, className, children, ...rest }, ref) => {
-    // 计算 gutter 对应的负 margin（动态值，不在 cva 中处理）
-    const [hGutter, vGutter] = typeof gutter === 'number' ? [gutter, gutter] : gutter
-    const gapClass = hGutter > 0 ? `-mx-[${hGutter / 2}px]` : ''
-    const rowGapClass = vGutter > 0 ? `-my-[${vGutter / 2}px]` : ''
+  ({ gutter = 0, align = 'top', justify = 'start', wrap = true, className, children, style, ...rest }, ref) => {
+    const [hGutter, vGutter] = normalizeGutter(gutter)
+    const gutterStyle: CSSProperties = {
+      ...(hGutter > 0 ? { marginLeft: -hGutter / 2, marginRight: -hGutter / 2 } : {}),
+      ...(vGutter > 0 ? { marginTop: -vGutter / 2, marginBottom: -vGutter / 2 } : {}),
+      ...style,
+    }
 
     return (
-      <div
-        ref={ref}
-        className={cn(
-          rowVariants({ align, justify, wrap }),
-          gapClass,
-          rowGapClass,
-          className,
-        )}
-        {...rest}
-      >
-        {children}
-      </div>
+      <GutterContext.Provider value={[hGutter, vGutter]}>
+        <div
+          ref={ref}
+          className={cn(rowVariants({ align, justify, wrap }), className)}
+          style={gutterStyle}
+          {...rest}
+        >
+          {children}
+        </div>
+      </GutterContext.Provider>
     )
   },
 )
 
 Row.displayName = 'Row'
 
-/**
- * Col 栅格列
- *
- * 基于百分比宽度的 24 列栅格列，支持响应式断点。
- */
 const Col = forwardRef<HTMLDivElement, ColProps>(
   ({
     span = 24,
@@ -55,14 +52,11 @@ const Col = forwardRef<HTMLDivElement, ColProps>(
     xxl,
     className,
     children,
+    style,
     ...rest
   }, ref) => {
-    // 计算基础类名（动态值，通过 grid-utils.ts 处理）
+    const [hGutter, vGutter] = useContext(GutterContext)
     const baseSpan = getSpanClass(span, offset)
-    const flexStyle = flex !== undefined ? `flex-[${flex}]` : ''
-    const orderClass = order !== undefined ? `order-${order}` : ''
-
-    // 响应式类名
     const responsiveClasses = [
       getResponsiveClass('xs', xs),
       getResponsiveClass('sm', sm),
@@ -74,8 +68,14 @@ const Col = forwardRef<HTMLDivElement, ColProps>(
       .filter(Boolean)
       .join(' ')
 
-    // span 为 0 时隐藏
     const hiddenClass = span === 0 ? 'hidden' : ''
+    const colStyle: CSSProperties = {
+      ...(hGutter > 0 ? { paddingLeft: hGutter / 2, paddingRight: hGutter / 2 } : {}),
+      ...(vGutter > 0 ? { paddingTop: vGutter / 2, paddingBottom: vGutter / 2 } : {}),
+      ...(flex !== undefined ? { flex } : {}),
+      ...(order !== undefined ? { order } : {}),
+      ...style,
+    }
 
     return (
       <div
@@ -83,12 +83,11 @@ const Col = forwardRef<HTMLDivElement, ColProps>(
         className={cn(
           colVariants(),
           baseSpan,
-          flexStyle,
-          orderClass,
           responsiveClasses,
           hiddenClass,
           className,
         )}
+        style={colStyle}
         {...rest}
       >
         {children}

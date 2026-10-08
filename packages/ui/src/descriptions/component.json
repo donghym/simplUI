@@ -1,0 +1,9 @@
+{
+  "name": "descriptions",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "description": "Descriptions list for displaying key-value pairs"
+}

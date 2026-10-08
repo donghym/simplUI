@@ -27,12 +27,11 @@ export default [
     ignores: [
       'node_modules/**',
       'dist/**',
-      'coverage/**',
       'pnpm-lock.yaml',
       'packages/cli/bin/**',
       'packages/cli/src/templates/**',
-      'storybook-static/**',
-      'storybook-demo/**',
+      'packages/docs/dist/**',
+      'packages/docs/.dumi/**',
     ],
   },
 ]

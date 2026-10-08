@@ -1,0 +1,8 @@
+{
+  "name": "space",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Space component for consistent spacing between elements"
+}

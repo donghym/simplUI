@@ -1,0 +1,8 @@
+{
+  "name": "slider",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Slider range input component"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "alert",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Alert component with success/info/warning/error types"
+}

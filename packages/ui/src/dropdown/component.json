@@ -1,0 +1,8 @@
+{
+  "name": "dropdown",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Dropdown menu with 6 placements, disabled state, and danger variant"
+}

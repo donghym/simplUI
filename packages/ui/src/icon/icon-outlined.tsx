@@ -2,7 +2,7 @@ import { useMemo, type CSSProperties } from 'react'
 import type { SVGProps } from 'react'
 import type { IconProps } from './types'
 
-/* ─── Two-tone color global ─── */
+/* ─── 双色图标全局颜色 ─── */
 
 let globalTwoToneColor: string | undefined = '#1677FF'
 
@@ -30,7 +30,7 @@ function lighten(hex: string, factor: number): string {
   return `rgb(${r},${g},${b})`
 }
 
-/* ─── Icon Wrapper ─── */
+/* ─── 图标容器 ─── */
 
 interface IconWrapperProps {
   className?: string
@@ -58,7 +58,7 @@ function IconWrapper({ className, style, spin, rotate, onClick, children, ...res
   )
 }
 
-/* ─── Icon Builders ─── */
+/* ─── 图标构建器 ─── */
 
 type IconRenderer = (props: IconProps & { twoToneColors?: [string, string] }) => React.ReactNode
 
@@ -80,7 +80,7 @@ function defineIcon(render: IconRenderer): React.FC<IconProps> {
   return Comp
 }
 
-/* ─── SVG path helper ─── */
+/* ─── SVG path 辅助函数 ─── */
 function svg(children: React.ReactNode, extra?: SVGProps<SVGSVGElement>): React.ReactNode {
   return <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" {...extra}>{children}</svg>
 }
@@ -90,7 +90,7 @@ function p(d: string) {
 }
 
 /* ═══════════════════════════════════════════════
-   Icon Set (Ant Design Outlined Style)
+   图标集（Ant Design Outlined 风格）
    ═══════════════════════════════════════════════ */
 
 export const ArrowLeftOutlined = defineIcon(() => svg(p('M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 0 0 0 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z')))

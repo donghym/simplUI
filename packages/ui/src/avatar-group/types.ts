@@ -6,7 +6,7 @@ import { avatarGroupVariants } from './avatar-group-variants'
 export interface AvatarItem {
   /** 图片地址 */
   src?: string
-  /** 显示名称（无 src 时显示首字符） */
+  /** 显示名称（无 src 且无 icon 时显示首字符） */
   name?: string
   /** 回退图标 */
   icon?: ReactNode

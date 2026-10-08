@@ -6,7 +6,7 @@ export type { IconProps, CustomIconProps, IconFontOptions } from './types'
 export * from './icons'
 export * from './icon-outlined'
 
-/* ─── Two-tone color global ─── */
+/* ─── 双色图标全局颜色 ─── */
 
 let globalTwoToneColor: string | undefined = '#1677FF'
 
@@ -18,7 +18,7 @@ export function getTwoToneColor(): string {
   return globalTwoToneColor!
 }
 
-/* ─── Base Icon (for custom components) ─── */
+/* ─── 基础图标（用于自定义组件）─── */
 
 export function Icon(props: CustomIconProps) {
   const { component: Component, className, rotate, spin, style, onClick, ...rest } = props

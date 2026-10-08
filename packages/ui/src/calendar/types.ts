@@ -5,6 +5,16 @@ import { calendarVariants } from './calendar-variants'
 /** 日历模式 */
 export type CalendarMode = 'month' | 'year'
 
+/** 日历事件 */
+export interface CalendarEvent {
+  /** 事件标题 */
+  title: string
+  /** 事件日期，格式 YYYY-MM-DD */
+  date: string
+  /** 事件颜色标记 */
+  color?: string
+}
+
 /** 日期单元格数据 */
 export interface CalendarCell {
   /** 日期对象 */
@@ -17,6 +27,8 @@ export interface CalendarCell {
   isSelected: boolean
   /** 是否禁用 */
   disabled: boolean
+  /** 当天的事件列表 */
+  events?: CalendarEvent[]
 }
 
 /** 日历组件 Props */
@@ -44,6 +56,10 @@ export interface CalendarProps
    * 返回 ReactNode 替换默认日期数字
    */
   dateFullCellRender?: (date: Date) => ReactNode
+  /** 事件列表 */
+  events?: CalendarEvent[]
+  /** 日期单元格自定义渲染（包含事件数据） */
+  dateCellRenderWithEvents?: (date: Date, events: CalendarEvent[]) => ReactNode
   /** 是否显示头部切换按钮。默认 true */
   headerRender?: boolean
   /** 自定义 className，通过 cn() + twMerge 合并 */

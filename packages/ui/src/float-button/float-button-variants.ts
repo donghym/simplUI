@@ -33,3 +33,6 @@ export const floatButtonTooltipVariants = cva(
     defaultVariants: { placement: 'right' },
   },
 )
+
+/** 悬浮按钮组容器变体 */
+export const floatButtonGroupVariants = cva('relative inline-flex flex-col', { variants: {} })

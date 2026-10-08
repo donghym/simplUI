@@ -1,0 +1,8 @@
+{
+  "name": "flex",
+  "version": "1.0.0",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "description": "Flex container with direction, wrap, justify, align support"
+}

@@ -1,4 +1,5 @@
 import { forwardRef, useCallback } from 'react'
+import { Avatar } from '../avatar'
 import { cn } from '../lib/utils'
 import {
   avatarGroupVariants,
@@ -10,37 +11,14 @@ import type { AvatarGroupProps, AvatarItem } from './types'
 /** 渲染单个头像 */
 const renderAvatar = (avatar: AvatarItem, index: number) => {
   const { src, name, icon } = avatar
-
-  if (src) {
-    return (
-      <span key={index} className={avatarGroupItemVariants()}>
-        <img
-          src={src}
-          alt={name ?? ''}
-          className="h-full w-full object-cover"
-        />
-      </span>
-    )
-  }
-
-  if (icon) {
-    return (
-      <span key={index} className={avatarGroupItemVariants()}>
-        {icon}
-      </span>
-    )
-  }
-
-  if (name) {
-    return (
-      <span key={index} className={avatarGroupItemVariants()}>
-        {name.charAt(0).toUpperCase()}
-      </span>
-    )
-  }
-
   return (
-    <span key={index} className={avatarGroupItemVariants()} />
+    <Avatar
+      key={index}
+      src={src}
+      alt={name}
+      icon={icon}
+      className={avatarGroupItemVariants()}
+    />
   )
 }
 

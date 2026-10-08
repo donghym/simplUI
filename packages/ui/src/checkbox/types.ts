@@ -23,7 +23,7 @@ export interface CheckboxProps
   onChange?: (checked: boolean) => void
   /** 复选框标签文本，点击标签文本可切换选中状态 */
   children?: ReactNode
-  /** 复选框的值，用于 Checkbox.Group 场景 */
+  /** 复选框的值（原生 input 的 value 属性） */
   value?: string
   /** 自定义类名，通过 cn() + twMerge 合并，可覆盖默认样式 */
   className?: string

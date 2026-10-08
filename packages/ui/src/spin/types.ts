@@ -28,17 +28,3 @@ export interface SpinProps
   /** Spin 尺寸 */
   spinSize?: SpinSize
 }
-
-/**
- * Spin 遮罩层属性（内部使用）
- */
-export interface SpinMaskProps {
-  /** 是否显示遮罩 */
-  visible: boolean
-  /** 加载提示文字 */
-  tip?: string
-  /** 自定义加载指示器 */
-  indicator?: ReactNode
-  /** 自定义 className */
-  className?: string
-}
